@@ -7,12 +7,14 @@
 //
 
 #import "ConfigController.h"
+#import "ActionSheetStringPicker.h"
 
 @interface ConfigController ()
 
 @end
 
 @implementation ConfigController
+@synthesize txt_currency;
 
 @synthesize
     ourStepper1,
@@ -27,13 +29,71 @@
     txt_cif;
 
 
+
+///////
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
+    int iva = [prefs integerForKey:@"iva"];
+    int irpf = [prefs integerForKey:@"irpf"];
+    NSString *name = [prefs stringForKey:@"name"];
+    NSString *cif = [prefs stringForKey:@"cif"];
+    NSString *email = [prefs stringForKey:@"email"];
+    NSString *linkedin = [prefs stringForKey:@"linkedin"];
+    
+    
+    
+    txt_iva.text = [NSString stringWithFormat:@"%d", iva];
+    txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
+    
+    txt_name.text = name;
+    txt_cif.text = cif;
+    txt_email.text = email;
+    txt_linkedin.text = linkedin;    
+    self.txt_currency.text = [prefs objectForKey:@"divisa"];
+    
+    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,380);
+    
+    
+    
+    
+    
+    
+    [self setBackground];
+    
+    
+}
+
+
+
+
+- (void)viewDidUnload {
+    [self setTxt_currency:nil];
+    [super viewDidUnload];
+}
+
+
+
+#pragma mark -
+#pragma mark Custom Methods
+
+
 ////////////////////////////
 
 - (void)setBackground{
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
 }
 
-////////////////////////////
+
+
+#pragma mark -
+#pragma mark IBActions
+
 
 - (IBAction)stepperValueChanged1:(id)sender 
 {
@@ -98,12 +158,6 @@
 
 }
 
-
-
-
-
-
-
 - (IBAction)sendEmailFeedback:(id)sender
 {
 
@@ -126,51 +180,51 @@
 }
 
 
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate
+
+
+
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [self dismissModalViewControllerAnimated:YES];
 }
 
 
-///////
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+#pragma mark -
+#pragma mark Custom Methods
+
+- (void)showCurrencyPicker{
     
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray *curencies = [NSLocale commonISOCurrencyCodes];
+    NSInteger initialSelection = ([curencies containsObject:[prefs objectForKey:@"divisa"]]) ? [curencies indexOfObject:[prefs objectForKey:@"divisa"]] : 0;
+    [ActionSheetStringPicker showPickerWithTitle:@"Divisa" rows:curencies initialSelection:initialSelection doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        self.txt_currency.text = selectedValue;
+        [prefs setObject:txt_currency.text forKey:@"divisa"];
+        
+    } cancelBlock:^(ActionSheetStringPicker *picker) {
+        
+    } origin:self.tabBarController.view];
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
-    int iva = [prefs integerForKey:@"iva"];
-    int irpf = [prefs integerForKey:@"irpf"];
-    NSString *name = [prefs stringForKey:@"name"];
-    NSString *cif = [prefs stringForKey:@"cif"];
-    NSString *email = [prefs stringForKey:@"email"];
-    NSString *linkedin = [prefs stringForKey:@"linkedin"];
-    
-
-
-    txt_iva.text = [NSString stringWithFormat:@"%d", iva];
-    txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
-
-    txt_name.text = name;
-    txt_cif.text = cif;
-    txt_email.text = email;
-    txt_linkedin.text = linkedin;    
-
-    
-    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,380);
-
-    
-
-
-    
-    
-    [self setBackground];
-    
-
 }
 
 
 
+#pragma mark -
+#pragma mark UITextFieldDelegate
 
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    if (textField == self.txt_currency) {
+        [self showCurrencyPicker];
+        return NO;
+    }
+    
+    return YES;
+    
+}
 @end

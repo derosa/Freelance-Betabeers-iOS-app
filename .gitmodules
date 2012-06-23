@@ -4,3 +4,6 @@
 [submodule "Freelance/Dependencies/SVProgressHUD"]
 	path = Freelance/Dependencies/SVProgressHUD
 	url = git://github.com/samvermette/SVProgressHUD.git
+[submodule "Freelance/Dependencies/ActionSheetPicker"]
+	path = Freelance/Dependencies/ActionSheetPicker
+	url = https://github.com/TimCinel/ActionSheetPicker.git

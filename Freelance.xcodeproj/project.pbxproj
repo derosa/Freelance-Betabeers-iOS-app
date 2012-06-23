@@ -41,6 +41,11 @@
 		34FA09F0157AD59700C2015F /* whitey.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FA09EF157AD59700C2015F /* whitey.png */; };
 		34FA09F2157ADA5000C2015F /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FA09F1157ADA5000C2015F /* happy.png */; };
 		34FA09F3157C4C9B00C2015F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EA125A156BF7BE00595693 /* SystemConfiguration.framework */; };
+		791456B015966B670061DDAA /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 791456A715966B670061DDAA /* AbstractActionSheetPicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		791456B115966B670061DDAA /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 791456A915966B670061DDAA /* ActionSheetDatePicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		791456B215966B670061DDAA /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 791456AB15966B670061DDAA /* ActionSheetDistancePicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		791456B315966B670061DDAA /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 791456AD15966B670061DDAA /* ActionSheetStringPicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		791456B415966B670061DDAA /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791456AF15966B670061DDAA /* DistancePickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		DB6B7E4615939D0900DA5685 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6B7E3315939D0900DA5685 /* MKAnnotationView+WebCache.m */; };
 		DB6B7E4715939D0900DA5685 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6B7E3515939D0900DA5685 /* SDImageCache.m */; };
 		DB6B7E4815939D0900DA5685 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6B7E3915939D0900DA5685 /* SDWebImageDecoder.m */; };
@@ -104,6 +109,16 @@
 		34EA125D156C09BD00595693 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		34FA09EF157AD59700C2015F /* whitey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitey.png; sourceTree = "<group>"; };
 		34FA09F1157ADA5000C2015F /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy.png; sourceTree = "<group>"; };
+		791456A615966B670061DDAA /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractActionSheetPicker.h; path = Dependencies/ActionSheetPicker/Pickers/AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		791456A715966B670061DDAA /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AbstractActionSheetPicker.m; path = Dependencies/ActionSheetPicker/Pickers/AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		791456A815966B670061DDAA /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionSheetDatePicker.h; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		791456A915966B670061DDAA /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetDatePicker.m; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		791456AA15966B670061DDAA /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionSheetDistancePicker.h; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		791456AB15966B670061DDAA /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetDistancePicker.m; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		791456AC15966B670061DDAA /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionSheetStringPicker.h; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		791456AD15966B670061DDAA /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetStringPicker.m; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		791456AE15966B670061DDAA /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistancePickerView.h; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.h; sourceTree = "<group>"; };
+		791456AF15966B670061DDAA /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistancePickerView.m; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.m; sourceTree = "<group>"; };
 		DB6B7E3215939D0900DA5685 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		DB6B7E3315939D0900DA5685 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		DB6B7E3415939D0900DA5685 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -277,9 +292,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		791456A415966B490061DDAA /* ActionSheetPicker */ = {
+			isa = PBXGroup;
+			children = (
+				791456A615966B670061DDAA /* AbstractActionSheetPicker.h */,
+				791456A715966B670061DDAA /* AbstractActionSheetPicker.m */,
+				791456A815966B670061DDAA /* ActionSheetDatePicker.h */,
+				791456A915966B670061DDAA /* ActionSheetDatePicker.m */,
+				791456AA15966B670061DDAA /* ActionSheetDistancePicker.h */,
+				791456AB15966B670061DDAA /* ActionSheetDistancePicker.m */,
+				791456AC15966B670061DDAA /* ActionSheetStringPicker.h */,
+				791456AD15966B670061DDAA /* ActionSheetStringPicker.m */,
+				791456AE15966B670061DDAA /* DistancePickerView.h */,
+				791456AF15966B670061DDAA /* DistancePickerView.m */,
+			);
+			name = ActionSheetPicker;
+			sourceTree = "<group>";
+		};
 		DB6B7E1315939B5300DA5685 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				791456A415966B490061DDAA /* ActionSheetPicker */,
 				DB6B7E4E1593E48100DA5685 /* SVProgressHUD */,
 				DB6B7E3115939D0900DA5685 /* SDWebImage */,
 			);
@@ -421,6 +454,11 @@
 				DB6B7E4D15939D0900DA5685 /* UIImageView+WebCache.m in Sources */,
 				DB6B7E531593E48100DA5685 /* SVProgressHUD.m in Sources */,
 				1DA3B67215963D3200C85842 /* TwitterDataProvider.m in Sources */,
+				791456B015966B670061DDAA /* AbstractActionSheetPicker.m in Sources */,
+				791456B115966B670061DDAA /* ActionSheetDatePicker.m in Sources */,
+				791456B215966B670061DDAA /* ActionSheetDistancePicker.m in Sources */,
+				791456B315966B670061DDAA /* ActionSheetStringPicker.m in Sources */,
+				791456B415966B670061DDAA /* DistancePickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -68,7 +68,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
     int iva = [prefs integerForKey:@"iva"];
     int irpf = [prefs integerForKey:@"irpf"];
-    NSString *divisa = @"€";//[prefs stringForKey:@"divisa"];
+    NSString *divisa = [prefs stringForKey:@"divisa"];
     
     
     float p1 = ((float)iva / 100);
@@ -274,12 +274,13 @@
     int iva = [prefs integerForKey:@"iva"];
     int irpf = [prefs integerForKey:@"irpf"];
     int precio_hora = [prefs integerForKey:@"precio_hora"];
-    NSString *divisa = @"€";
+    NSString *divisa = [prefs objectForKey:@"divisa"];
     
     if( !iva ){
         iva = 18;
         irpf = 15;
         precio_hora = 30;
+        divisa = @"EUR";
         
         [prefs setInteger:iva forKey:@"iva"];
         [prefs setInteger:irpf forKey:@"irpf"];

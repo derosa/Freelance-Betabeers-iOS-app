@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 
-@interface ConfigController : UIViewController <MFMailComposeViewControllerDelegate>  {
+@interface ConfigController : UIViewController <MFMailComposeViewControllerDelegate,UITextFieldDelegate>  {
     IBOutlet UIScrollView *scrollview;
 }
 
@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txt_linkedin;
 @property (strong, nonatomic) IBOutlet UITextField *txt_name;
 @property (strong, nonatomic) IBOutlet UITextField *txt_cif;
+@property (weak, nonatomic) IBOutlet UITextField *txt_currency;
 
 
 - (IBAction)stepperValueChanged1:(id)sender;
