@@ -90,6 +90,22 @@
 }
 
 
+- (void)showCurrencyPicker{
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray *curencies = [NSLocale commonISOCurrencyCodes];
+    NSInteger initialSelection = ([curencies containsObject:[prefs objectForKey:@"divisa"]]) ? [curencies indexOfObject:[prefs objectForKey:@"divisa"]] : 0;
+    [ActionSheetStringPicker showPickerWithTitle:@"Divisa" rows:curencies initialSelection:initialSelection doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        self.txt_currency.text = selectedValue;
+        [prefs setObject:txt_currency.text forKey:@"divisa"];
+        
+    } cancelBlock:^(ActionSheetStringPicker *picker) {
+        
+    } origin:self.tabBarController.view];
+    
+}
+
+
 
 #pragma mark -
 #pragma mark IBActions
@@ -190,26 +206,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-
-
-#pragma mark -
-#pragma mark Custom Methods
-
-- (void)showCurrencyPicker{
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSArray *curencies = [NSLocale commonISOCurrencyCodes];
-    NSInteger initialSelection = ([curencies containsObject:[prefs objectForKey:@"divisa"]]) ? [curencies indexOfObject:[prefs objectForKey:@"divisa"]] : 0;
-    [ActionSheetStringPicker showPickerWithTitle:@"Divisa" rows:curencies initialSelection:initialSelection doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-        self.txt_currency.text = selectedValue;
-        [prefs setObject:txt_currency.text forKey:@"divisa"];
-        
-    } cancelBlock:^(ActionSheetStringPicker *picker) {
-        
-    } origin:self.tabBarController.view];
-    
-}
 
 
 
