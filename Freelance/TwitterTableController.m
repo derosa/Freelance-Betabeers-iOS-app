@@ -9,12 +9,15 @@
 #import "TwitterTableController.h"
 #import "SimpleTableCell.h"
 
+#import "TwitterDataProvider.h"
+
 
 @interface TwitterTableController ()
-
+@property (strong, nonatomic) IBOutlet TwitterDataProvider *twitterDataProvider;
 @end
 
 @implementation TwitterTableController
+@synthesize twitterDataProvider;
 
 @synthesize tableView;
 
@@ -49,65 +52,6 @@
 
 ////////////////////////////
 
-- (void) refreshTweets
-{
-    
-    
-    
-    [SVProgressHUD show];
-    
-    
-    NSString *hashtag = @"freesos";
-    int limit = 30;
-    
-    
-    //freesos
-    NSString *url = [NSString stringWithFormat:@"http://search.twitter.com/search.json?q=%%23%@%%20-RT&rpp=%d&include_entities=true&result_type=recent", hashtag, limit];
-    
-    
-    // fill table
-    arrayC = [[NSMutableArray alloc] init];
-    
-    
-    NSData *items = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    NSInputStream *stream = [[NSInputStream alloc] initWithData:items];
-    [stream open];
-    
-    if (stream) {
-        
-        
-        
-        
-        
-        NSError *parseError = nil;
-        id jsonObject = [NSJSONSerialization JSONObjectWithStream:stream options:NSJSONReadingAllowFragments error:&parseError];
-
-        
-        NSArray *items = [jsonObject objectForKey:@"results"];
-        for (NSDictionary *item in items) {
-            
-            
-            
-            NSLog(@"%@",[item objectForKey:@"text"]);
-            
-            
-            
-            [arrayC addObject:item];
-
-            
-        }
-        
-        [tableView reloadData]; 
-        [SVProgressHUD dismiss];
-
-    } else {
-        NSLog(@"Failed to open stream.");
-    }
-    
-    
-}
-
-
 - (IBAction)newTweet:(id)sender
 {
  
@@ -127,7 +71,25 @@
     
 }
 - (IBAction)refreshTweet:(id)sender{
-    [self refreshTweets];
+    static BOOL requestInProgress = NO;
+    
+    if (!requestInProgress)
+    {    
+        [SVProgressHUD show];
+        
+        NSString *hashtag = @"freesos";
+        int limit = 30;
+        
+        [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag                                                               limit:limit completionBlock:^(NSArray *tweets) {
+            arrayC = tweets;
+            [tableView reloadData];
+            [SVProgressHUD dismiss];
+            
+            requestInProgress = NO;
+        }];
+        
+        requestInProgress = YES;
+    }
 }
 
 
@@ -145,30 +107,21 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    
-
-    
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     
     if ( [self connectedToNetwork] ) {
     
-        [self refreshTweets];
-    }else{
+        [self refreshTweet:nil];
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
         [alert show];
     }
 }
 
-
-
-
-
-
-- (void)viewDidDisappear:(BOOL)animated{
-    
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
     [SVProgressHUD dismiss];
 }
 
@@ -177,7 +130,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return[arrayC count];
+    return [arrayC count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tabla cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -193,10 +146,6 @@
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
-        
-        
-        cell.prepTimeLabel.font = [UIFont systemFontOfSize:15];
-        cell.prepTimeLabel.numberOfLines = 0;
         
     } 
     
@@ -219,12 +168,7 @@
 
 	cell.nameLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"];
 
-    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
-    
-    
-    cell.prepTimeLabel.numberOfLines = 0;
-    [cell.prepTimeLabel sizeToFit];
-    
+    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];  
     
 
     return cell;
@@ -232,10 +176,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
-    
-
     if( [TWTweetComposeViewController canSendTweet] ){
         
         NSString *mensaje = [NSString stringWithFormat:@"@%@ ", [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"]];
@@ -257,22 +197,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //return 125;
+    static const CGFloat kCellMinHeight = 64.0f;
+    static const CGFloat kTweetLabelFontSize = 15.0f;
+    static const CGFloat kTweetLabelWidth = 240.0f;
+    static const CGFloat kCellHeightOffset = 35.0f;
     
-
-    NSString *cellValue =[[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
+    NSString *cellValue = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
     
     CGSize size = [cellValue 
-                   sizeWithFont:[UIFont systemFontOfSize:16] 
-                   constrainedToSize:CGSizeMake(300, CGFLOAT_MAX)];
+                   sizeWithFont:[UIFont systemFontOfSize:kTweetLabelFontSize]
+                   constrainedToSize:CGSizeMake(kTweetLabelWidth, CGFLOAT_MAX)];
     
     
-    
-    
-    return size.height + 50;
-    
-    
- 
+    return MAX(kCellMinHeight, size.height + kCellHeightOffset);
     
 }
 
@@ -284,9 +221,14 @@
     if (buttonIndex == 0){
         //consejo.text = @"Error no se pudieron cargar los contenidos";
     }else{
+        #warning llamar a viewDidAppear es una CHAPUZA
         [self viewDidAppear:YES];
     }
 }
 
 
+- (void)viewDidUnload {
+    [self setTwitterDataProvider:nil];
+    [super viewDidUnload];
+}
 @end
