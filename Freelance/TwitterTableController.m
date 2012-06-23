@@ -147,10 +147,6 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
         
-        
-        cell.prepTimeLabel.font = [UIFont systemFontOfSize:15];
-        cell.prepTimeLabel.numberOfLines = 0;
-        
     } 
     
     
@@ -172,12 +168,7 @@
 
 	cell.nameLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"];
 
-    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
-    
-    
-    cell.prepTimeLabel.numberOfLines = 0;
-    [cell.prepTimeLabel sizeToFit];
-    
+    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];  
     
 
     return cell;
@@ -206,17 +197,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //return 125;
+    static const CGFloat kCellMinHeight = 64;
     
-
-    NSString *cellValue =[[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
+    NSString *cellValue = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
     
     CGSize size = [cellValue 
-                   sizeWithFont:[UIFont systemFontOfSize:16] 
-                   constrainedToSize:CGSizeMake(300, CGFLOAT_MAX)];
+                   sizeWithFont:[UIFont systemFontOfSize:15]
+                   constrainedToSize:CGSizeMake(240, CGFLOAT_MAX)];
     
     
-    return size.height + 50;
+    return MAX(kCellMinHeight, size.height + 35);
     
 }
 
@@ -228,6 +218,7 @@
     if (buttonIndex == 0){
         //consejo.text = @"Error no se pudieron cargar los contenidos";
     }else{
+        #warning llamar a viewDidAppear es una CHAPUZA
         [self viewDidAppear:YES];
     }
 }
