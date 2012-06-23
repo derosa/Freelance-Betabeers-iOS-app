@@ -197,16 +197,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static const CGFloat kCellMinHeight = 64;
+    static const CGFloat kCellMinHeight = 64.0f;
+    static const CGFloat kTweetLabelFontSize = 15.0f;
+    static const CGFloat kTweetLabelWidth = 240.0f;
+    static const CGFloat kCellHeightOffset = 35.0f;
     
     NSString *cellValue = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
     
     CGSize size = [cellValue 
-                   sizeWithFont:[UIFont systemFontOfSize:15]
-                   constrainedToSize:CGSizeMake(240, CGFLOAT_MAX)];
+                   sizeWithFont:[UIFont systemFontOfSize:kTweetLabelFontSize]
+                   constrainedToSize:CGSizeMake(kTweetLabelWidth, CGFLOAT_MAX)];
     
     
-    return MAX(kCellMinHeight, size.height + 35);
+    return MAX(kCellMinHeight, size.height + kCellHeightOffset);
     
 }
 
