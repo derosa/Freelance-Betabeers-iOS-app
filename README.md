@@ -7,9 +7,9 @@ TO-DO 1.1
 ----------
 * versión minima ios 5.1 a 5.0 (ok)
 * minimo precio hora 10€ a 5€ (ok)
-* tabla tweets no se ajusta
+* tabla tweets no se ajusta (ok)
 * mejorar diseño (icono, colores interfaz)
-* elegir divisa
+* elegir divisa (ok)
 * limpiar código duplicado entre controladores (setBackground, connectedToNetwork)
 
 Opensource
