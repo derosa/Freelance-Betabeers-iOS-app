@@ -17,10 +17,25 @@ Opensource
 * Estoy aprendiendo objective-c, seguro que muchas cosas se podrían hacer mucho mejor por lo que os ánimo a colaborar haciendo pullrequests tanto para mejorar tanto el código como el diseño.
 * También quiero que el código o parte de él sea una base para hacer un port a android.
 
+Instalación
+-----------
+* git clone git://github.com/miquelcamps/Freelance-Betabeers-iOS-app.git
+* git submodule init
+* git submodule update
+
+Metodo de emergencia
+--------------------
+si quieres volver a la ultima versión, borra el contenido de la carpeta del repo y ejecuta
+git reset --hard HEAD
+
 Librerias de terceros
 ---------------------
 * SVProgressHUD
 * SDWebImage
+
+Creditos iconos
+---------------
+* http://blog.twg.ca/2010/11/retina-display-icon-set/
 
 Enlaces
 -------
