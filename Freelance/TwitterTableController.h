@@ -17,7 +17,7 @@
 #import <SystemConfiguration/SCNetworkReachability.h>
 
 @interface TwitterTableController : UIViewController <UIAlertViewDelegate>{
-    NSMutableArray *arrayC;
+    NSArray *arrayC;
     IBOutlet UITableView *tableView;
     BOOL isRetina;
 }
