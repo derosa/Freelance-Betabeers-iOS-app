@@ -80,7 +80,8 @@
 
 ////////////////////////////
 
-C    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
+- (void)setBackground{
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
 }
 
 
