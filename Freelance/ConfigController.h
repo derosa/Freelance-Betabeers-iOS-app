@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txt_name;
 @property (strong, nonatomic) IBOutlet UITextField *txt_cif;
 @property (weak, nonatomic) IBOutlet UITextField *txt_currency;
+@property (nonatomic, assign) IBOutlet UIScrollView *scrollview;
 
 
 - (IBAction)stepperValueChanged1:(id)sender;

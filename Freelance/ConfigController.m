@@ -14,19 +14,17 @@
 @end
 
 @implementation ConfigController
-@synthesize txt_currency;
 
-@synthesize
-    ourStepper1,
-    ourStepper2,
-
-    txt_iva,
-    txt_irpf,
-    txt_email,
-    txt_linkedin,
-
-    txt_name,
-    txt_cif;
+@synthesize ourStepper1 = _ourStepper1;
+@synthesize ourStepper2 = _ourStepper2;
+@synthesize txt_iva = _txt_iva;
+@synthesize txt_irpf = _txt_irpf;
+@synthesize txt_email = _txt_email;
+@synthesize txt_linkedin = _txt_linkedin;
+@synthesize txt_name = _txt_name;
+@synthesize txt_cif = _txt_cif;
+@synthesize txt_currency = _txt_currency;
+@synthesize scrollview = _scrollview;
 
 
 
@@ -48,21 +46,18 @@
     
     
     
-    txt_iva.text = [NSString stringWithFormat:@"%d", iva];
-    txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
+    self.txt_iva.text = [NSString stringWithFormat:@"%d", iva];
+    self.ourStepper1.value = iva;
+    self.txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
+    self.ourStepper2.value = irpf;
     
-    txt_name.text = name;
-    txt_cif.text = cif;
-    txt_email.text = email;
-    txt_linkedin.text = linkedin;    
+    self.txt_name.text = name;
+    self.txt_cif.text = cif;
+    self.txt_email.text = email;
+    self.txt_linkedin.text = linkedin;    
     self.txt_currency.text = [prefs objectForKey:@"divisa"];
     
-    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,380);
-    
-    
-    
-    
-    
+    self.scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,380);
     
     [self setBackground];
     
@@ -85,8 +80,7 @@
 
 ////////////////////////////
 
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
+C    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
 }
 
 
@@ -97,7 +91,7 @@
     NSInteger initialSelection = ([curencies containsObject:[prefs objectForKey:@"divisa"]]) ? [curencies indexOfObject:[prefs objectForKey:@"divisa"]] : 0;
     [ActionSheetStringPicker showPickerWithTitle:@"Divisa" rows:curencies initialSelection:initialSelection doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         self.txt_currency.text = selectedValue;
-        [prefs setObject:txt_currency.text forKey:@"divisa"];
+        [prefs setObject:self.txt_currency.text forKey:@"divisa"];
         
     } cancelBlock:^(ActionSheetStringPicker *picker) {
         
@@ -113,8 +107,8 @@
 
 - (IBAction)stepperValueChanged1:(id)sender 
 {
-    int iva = ourStepper1.value;
-    txt_iva.text = [NSString stringWithFormat:@"%d", iva];
+    int iva = self.ourStepper1.value;
+    self.txt_iva.text = [NSString stringWithFormat:@"%d", iva];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setInteger:iva forKey:@"iva"];
@@ -122,8 +116,8 @@
 
 - (IBAction)stepperValueChanged2:(id)sender 
 {
-    int irpf = ourStepper2.value;
-    txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
+    int irpf = self.self.ourStepper2.value;
+    self.txt_irpf.text = [NSString stringWithFormat:@"%d", irpf];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setInteger:irpf forKey:@"irpf"];
@@ -133,27 +127,27 @@
 - (IBAction)stepperValueChanged4:(id)sender 
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:txt_email.text forKey:@"email"];
+    [prefs setObject:self.txt_email.text forKey:@"email"];
 }
 
 - (IBAction)stepperValueChanged5:(id)sender 
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:txt_linkedin.text forKey:@"linkedin"];
+    [prefs setObject:self.txt_linkedin.text forKey:@"linkedin"];
 }
 
 
 - (IBAction)stepperValueChanged6:(id)sender 
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:txt_name.text forKey:@"name"];
+    [prefs setObject:self.txt_name.text forKey:@"name"];
 }
 
 
 - (IBAction)stepperValueChanged7:(id)sender 
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:txt_cif.text forKey:@"cif"];
+    [prefs setObject:self.txt_cif.text forKey:@"cif"];
 }
 
 -(IBAction)textFieldReturn:(id)sender
