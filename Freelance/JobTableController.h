@@ -15,7 +15,6 @@
 @interface JobTableController : UIViewController <UIAlertViewDelegate>{
     NSMutableArray *arrayC;
     IBOutlet UITableView *tableView;
-    BOOL connected;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

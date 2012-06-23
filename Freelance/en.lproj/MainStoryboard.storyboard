@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2429" systemVersion="12A239" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1421"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Presupuesto Controller - First-->
@@ -436,13 +436,29 @@
                                     </textField>
                                     <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" maximumValue="100" id="Cb3-TS-A1W">
                                         <rect key="frame" x="206" y="295" width="94" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="stepperValueChanged2:" destination="QPr-SF-AFO" eventType="valueChanged" id="tXo-T7-4n5"/>
                                         </connections>
                                     </stepper>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="IRPF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="GLr-V4-Pgn">
                                         <rect key="frame" x="14" y="297" width="97" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="EUR" borderStyle="roundedRect" minimumFontSize="17" id="cSU-a3-tfN">
+                                        <rect key="frame" x="142" y="333" width="64" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="QPr-SF-AFO" id="VhA-Ad-i16"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DEVISA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RJn-Ai-aJ8">
+                                        <rect key="frame" x="14" y="337" width="97" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -477,7 +493,7 @@
                                     </textField>
                                     <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="18" maximumValue="100" id="Kiz-KW-7gO">
                                         <rect key="frame" x="206" y="254" width="94" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="stepperValueChanged1:" destination="QPr-SF-AFO" eventType="valueChanged" id="U5N-uf-gby"/>
                                         </connections>
@@ -603,6 +619,7 @@
                         <outlet property="ourStepper2" destination="Cb3-TS-A1W" id="fqj-aR-A0G"/>
                         <outlet property="scrollview" destination="mWN-R4-RtJ" id="CAQ-fp-o83"/>
                         <outlet property="txt_cif" destination="xhH-BH-bgt" id="iXt-gI-vIB"/>
+                        <outlet property="txt_currency" destination="cSU-a3-tfN" id="e0a-wD-UiO"/>
                         <outlet property="txt_email" destination="QTW-4R-dPW" id="oFb-PQ-Duc"/>
                         <outlet property="txt_irpf" destination="vDS-m6-JMF" id="GJU-i3-wha"/>
                         <outlet property="txt_iva" destination="FmS-Ad-wWm" id="5pi-Fw-T1O"/>
@@ -706,7 +723,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="N6H-UU-Uin" id="Fmi-wd-jNE"/>
-                        <segue destination="8U0-fj-vWG" identifier="getJob" kind="push" id="DGk-iV-vSf"/>
+                        <segue destination="8U0-fj-vWG" kind="push" identifier="getJob" id="DGk-iV-vSf"/>
                     </connections>
                 </viewController>
             </objects>
@@ -773,6 +790,103 @@
         <image name="smile_24.png" width="24" height="24"/>
         <image name="tweet.png" width="36" height="30"/>
     </resources>
+    <classes>
+        <class className="ConfigController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigController.h"/>
+            <relationships>
+                <relationship kind="action" name="rateApp:"/>
+                <relationship kind="action" name="sendEmailFeedback:"/>
+                <relationship kind="action" name="stepperValueChanged1:"/>
+                <relationship kind="action" name="stepperValueChanged2:"/>
+                <relationship kind="action" name="stepperValueChanged4:"/>
+                <relationship kind="action" name="stepperValueChanged5:"/>
+                <relationship kind="action" name="stepperValueChanged6:"/>
+                <relationship kind="action" name="stepperValueChanged7:"/>
+                <relationship kind="outlet" name="ourStepper1" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper2" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="scrollview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="txt_cif" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_currency" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_email" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_irpf" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_iva" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_linkedin" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txt_name" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="JobTableController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/JobTableController.h"/>
+            <relationships>
+                <relationship kind="action" name="info:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="JobViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/JobViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="replyJob:"/>
+                <relationship kind="outlet" name="btnReply" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descripcion" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fecha" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="titulo" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PresupuestoController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PresupuestoController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendEmail:"/>
+                <relationship kind="action" name="stepperValueChanged1:"/>
+                <relationship kind="action" name="stepperValueChanged2:"/>
+                <relationship kind="action" name="stepperValueChanged3:"/>
+                <relationship kind="action" name="stepperValueChanged4:"/>
+                <relationship kind="action" name="stepperValueChanged5:"/>
+                <relationship kind="action" name="stepperValueChanged6:"/>
+                <relationship kind="action" name="switchIRPFValueChanged:"/>
+                <relationship kind="outlet" name="lblIRPF" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblIVA" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ourStepper1" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper2" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper3" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper4" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper5" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="ourStepper6" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="scrollview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="stepperValueText1" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stepperValueText2" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stepperValueText3" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stepperValueText4" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stepperValueText5" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stepperValueText6" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="switchIRPF" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="txtBase" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtHoras" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtIRPF" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtIVA" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtTotal" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TipsController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipsController.h"/>
+            <relationships>
+                <relationship kind="action" name="cargarFrase:"/>
+                <relationship kind="action" name="twittearConsejo:"/>
+                <relationship kind="outlet" name="consejo" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TwitterDataProvider" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterDataProvider.h"/>
+        </class>
+        <class className="TwitterTableController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterTableController.h"/>
+            <relationships>
+                <relationship kind="action" name="newTweet:"/>
+                <relationship kind="action" name="refreshTweet:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="twitterDataProvider" candidateClass="TwitterDataProvider"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
