@@ -7,13 +7,31 @@
 //
 
 #import "TwitterTableController.h"
+
+#import <Twitter/Twitter.h>
+
+#import "UIImageView+WebCache.h"
+
+#import "SVProgressHUD.h"
+
+#include <netinet/in.h>
+#import <SystemConfiguration/SCNetworkReachability.h>
+
 #import "SimpleTableCell.h"
 
 #import "TwitterDataProvider.h"
 
+@interface TwitterTableController ()  <UIAlertViewDelegate>{
+    NSArray *arrayC;
+    IBOutlet UITableView *tableView;
+    BOOL isRetina;
+}
 
-@interface TwitterTableController ()
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet TwitterDataProvider *twitterDataProvider;
+
+- (IBAction)newTweet:(id)sender;
+- (IBAction)refreshTweet:(id)sender;
 @end
 
 @implementation TwitterTableController

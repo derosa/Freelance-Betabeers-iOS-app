@@ -8,7 +8,17 @@
 
 #import "TipsController.h"
 
-@interface TipsController ()
+#import <Twitter/Twitter.h>
+
+#include <netinet/in.h>
+#import <SystemConfiguration/SCNetworkReachability.h>
+
+@interface TipsController () <UIAlertViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UILabel *consejo;
+
+- (IBAction)cargarFrase:(id)sender;
+- (IBAction)twittearConsejo:(id)sender;
 
 @end
 

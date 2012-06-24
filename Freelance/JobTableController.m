@@ -9,23 +9,30 @@
 #import "JobTableController.h"
 #import "JobViewController.h"
 
+#import "SVProgressHUD.h"
 
-@interface JobTableController ()
-
-@end
-
-@implementation JobTableController
-
-@synthesize tableView;
+#include <netinet/in.h>
+#import <SystemConfiguration/SCNetworkReachability.h>
 
 
+@interface JobTableController () <UIAlertViewDelegate>{
+    NSMutableArray *arrayC;
+    IBOutlet UITableView *tableView;
+}
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
+- (IBAction)info:(id)sender;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
+@end
 
+@implementation JobTableController
 
+@synthesize tableView;
 
 - (void)viewDidAppear:(BOOL)animated{
     

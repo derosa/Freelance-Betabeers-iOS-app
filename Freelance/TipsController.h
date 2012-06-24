@@ -7,16 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Twitter/Twitter.h>
 
-#include <netinet/in.h>
-#import <SystemConfiguration/SCNetworkReachability.h>
-
-@interface TipsController : UIViewController <UIAlertViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UILabel *consejo;
-
-- (IBAction)cargarFrase:(id)sender;
-- (IBAction)twittearConsejo:(id)sender;
+@interface TipsController : UIViewController
 
 @end
