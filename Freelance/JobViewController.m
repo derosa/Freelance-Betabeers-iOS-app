@@ -10,27 +10,60 @@
 
 #import <MessageUI/MessageUI.h>
 
-@interface JobViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
-    
-    IBOutlet UIScrollView *scrollview;
-}
+@interface JobViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate> 
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *web;
 
-@property (strong, nonatomic) IBOutlet UILabel *titulo;
-@property (strong, nonatomic) IBOutlet UILabel *fecha;
-@property (strong, nonatomic) IBOutlet UILabel *descripcion;
-@property (strong, nonatomic) IBOutlet UIButton *btnReply;
-
-- (IBAction)replyJob:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *titulo;
+@property (weak, nonatomic) IBOutlet UILabel *fecha;
+@property (weak, nonatomic) IBOutlet UILabel *descripcion;
+@property (weak, nonatomic) IBOutlet UIButton *btnReply;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
 @end
 
 @implementation JobViewController
 
 
+@synthesize scrollview = _scrollview;
 @synthesize job, titulo, fecha, descripcion, email, web, btnReply;
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.titulo.text = [job objectForKey:@"title"];
+    
+    if( [[job objectForKey:@"interested"] isEqualToString: @"0"] )
+    {
+        self.fecha.text = [job objectForKey:@"date"];
+    }else{
+        self.fecha.text = [NSString stringWithFormat:@"%@ - %@ interesados", [job objectForKey:@"date"], [job objectForKey:@"interested"]];
+    }
+        
+    self.title = [job objectForKey:@"company"];
+        
+    self.descripcion.text = [job objectForKey:@"body"];
+    self.email = [job objectForKey:@"email"];
+    self.web = [job objectForKey:@"url"];
+    
+    self.descripcion.numberOfLines = 0;
+    [self.descripcion sizeToFit];
+    
+    self.scrollview.contentSize = CGSizeMake(self.scrollview.frame.size.width,
+                                        descripcion.frame.size.height+110);
+    
+    self.btnReply.frame = CGRectMake(self.btnReply.frame.origin.x, (self.descripcion.frame.size.height + 35), self.btnReply.frame.size.width, self.btnReply.frame.size.height);
+        
+}
+
+
+#pragma mark -
+#pragma mark IBActions
+
 
 - (IBAction)replyJob:(id)sender{
 
@@ -38,9 +71,14 @@
 
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	
-    [popupQuery showInView:self.view];
+    [popupQuery showInView:self.tabBarController.view];
 
 }
+
+
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
@@ -53,46 +91,40 @@
     
     // reply
 	if (buttonIndex == 0) {
-
-        to = [NSString stringWithString:email];
+        
+        to = [NSString stringWithString:self.email];
         subject = [NSString stringWithFormat:@"RE: %@", self.titulo.text];
         NSString *linkedin = [prefs stringForKey:@"linkedin"];
-        
-        NSLog(@"%@",linkedin);
-        
+//        NSLog(@"%@",linkedin);
         
         if( [linkedin isEqualToString: @""] )
         {
-            body = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\">enlace de la oferta</a>", web];
+            body = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\">enlace de la oferta</a>", self.web];
             
         }else{
-            body = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\">mi linkedin</a><br/><br/><a href=\"%@\">enlace de la oferta</a>", linkedin, web];
+            body = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\">mi linkedin</a><br/><br/><a href=\"%@\">enlace de la oferta</a>", linkedin, self.web];
         }
         
-        
-    // copy
+        // copy
     } else if (buttonIndex == 1) {
 		
         to = [prefs stringForKey:@"email"];
         subject = [NSString stringWithFormat:@"Fwd: %@", self.titulo.text];
-        body = [NSString stringWithFormat:@"<a href=\"%@\">enlace de la oferta</a><br/><br/>%@", web, self.descripcion.text];
-        
+        body = [NSString stringWithFormat:@"<a href=\"%@\">enlace de la oferta</a><br/><br/>%@", self.web, self.descripcion.text];
         
     }
     
     
     if (buttonIndex != 2) {
-            
+        
         if ([MFMailComposeViewController canSendMail]) {
             
             MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
             [controller setSubject: subject ];
             [controller setToRecipients:[NSArray arrayWithObject:to]];
             [controller setMessageBody:body isHTML:YES];
-            
-            
-            [self presentModalViewController:controller animated:YES];
             controller.mailComposeDelegate = self;
+            [self presentModalViewController:controller animated:YES];
             
         }else{
             
@@ -105,7 +137,8 @@
 	
 }
 
-
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [self dismissModalViewControllerAnimated:YES];
@@ -113,48 +146,5 @@
 
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.titulo.text = [job objectForKey:@"title"];
-    
-
-    
-    
-    if( [[job objectForKey:@"interested"] isEqualToString: @"0"] )
-    {
-        self.fecha.text = [job objectForKey:@"date"];
-    }else{
-        self.fecha.text = [NSString stringWithFormat:@"%@ - %@ interesados", [job objectForKey:@"date"], [job objectForKey:@"interested"]];
-    }
-    
-    
-    
-    self.title = [job objectForKey:@"company"];
-    
-
-    
-    self.descripcion.text = [job objectForKey:@"body"];
-    email = [job objectForKey:@"email"];
-    web = [job objectForKey:@"url"];
-    
-    
-    descripcion.numberOfLines = 0;
-    [descripcion sizeToFit];
-    
-    
-    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,
-                                        descripcion.frame.size.height+110);
-    
-    
-    
-    
-
-    btnReply.frame = CGRectMake(btnReply.frame.origin.x, (descripcion.frame.size.height + 35), btnReply.frame.size.width, btnReply.frame.size.height);
-
-
-    
-}
 
 @end

@@ -11,44 +11,31 @@
 
 #import "JobsDataProvider.h"
 
-@interface JobTableController () <UIAlertViewDelegate> {
-    NSArray *_jobs;
-}
+@interface JobTableController () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet JobsDataProvider *jobsDataProvider;
-
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-
-- (IBAction)info:(id)sender;
+@property (nonatomic, retain) NSArray *jobs;
 
 @end
 
 @implementation JobTableController
 @synthesize jobsDataProvider;
+@synthesize jobs = _jobs;
 
 @synthesize tableView;
+
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDataIfVisible) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
 
 - (void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    
-    //TODO: check connection only on request fail, it's not a flight ticket :)
-    if ([self connectedToNetwork] ) {
-        
-        [SVProgressHUD show];
-        
-        [self.jobsDataProvider requestJobsWithCompletionBlock:^(NSArray *jobs) {
-            _jobs = jobs;
-            
-            [self.tableView reloadData];
-            
-            [SVProgressHUD dismiss];
-        }];
-        
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
-        [alert show];
-    }
+    [self refreshData];
     
 }
 
@@ -59,9 +46,15 @@
     [SVProgressHUD dismiss];
 }
 
+- (void)viewDidUnload{
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
 
-#pragma mark -
-#pragma mark Custom Methods
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -71,17 +64,43 @@
         JobViewController *destination = [segue destinationViewController];
         NSIndexPath * indexPath = (NSIndexPath*)sender;
         
-        destination.job = [_jobs objectAtIndex:[indexPath row]];
+        destination.job = [self.jobs objectAtIndex:[indexPath row]];
     }
 }
 
 
+#pragma mark -
+#pragma mark Custom Methods
 
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != 0){
-        [self viewDidAppear:YES];
+- (void)refreshData{
+    
+    //TODO: check connection only on request fail, it's not a flight ticket :)
+    if ([self connectedToNetwork] ) {
+        
+        [SVProgressHUD show];
+        
+        __weak JobTableController *weakSelf = self;
+        [self.jobsDataProvider requestJobsWithCompletionBlock:^(NSArray *jobs) {
+            weakSelf.jobs = jobs;
+            
+            [weakSelf.tableView reloadData];
+            
+            [SVProgressHUD dismiss];
+        }];
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
+        [alert show];
     }
 }
+
+- (void)refreshDataIfVisible{
+    
+    if (self.tabBarController.selectedViewController == self.navigationController) {
+        [self refreshData];
+    }
+}
+
 
 #pragma mark -
 #pragma mark IBActions
@@ -94,7 +113,17 @@
 }
 
 
-//////////////
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0){
+        [self refreshData];
+    }
+}
+
+
 
 #pragma mark -
 #pragma mark UITableViewdataSource & UITableViewDelegate
@@ -102,7 +131,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_jobs count];
+    return [self.jobs count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -112,7 +141,7 @@
     static const CGFloat kJobTitleWidth = 300.f;
     static const CGFloat kJobTitleVerticalMargin = 10.f;
     
-    NSString *jobTitle = [[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
+    NSString *jobTitle = [[self.jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
     CGSize size = [jobTitle sizeWithFont:[UIFont systemFontOfSize:kJobTitleLabelFontSize] constrainedToSize:CGSizeMake(kJobTitleWidth, CGFLOAT_MAX)];
     
     return MAX(kCellMinHeight, size.height + kJobTitleVerticalMargin);
@@ -127,11 +156,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
     
-	NSString *cellValue =[[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
+	NSString *cellValue =[[self.jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
 	cell.textLabel.text = cellValue ;
-    cell.textLabel.font = [UIFont systemFontOfSize:18];
     
     return cell;
 }

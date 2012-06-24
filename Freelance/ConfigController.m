@@ -29,19 +29,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txt_currency;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
-- (IBAction)stepperValueChanged1:(id)sender;
-- (IBAction)stepperValueChanged2:(id)sender;
-- (IBAction)stepperValueChanged4:(id)sender;
-- (IBAction)stepperValueChanged5:(id)sender;
-- (IBAction)stepperValueChanged6:(id)sender;
-- (IBAction)stepperValueChanged7:(id)sender;
-
-
-/////////////////
-
-- (IBAction)rateApp:(id)sender;
-- (IBAction)sendEmailFeedback:(id)sender;
-
 @end
 
 @implementation ConfigController
