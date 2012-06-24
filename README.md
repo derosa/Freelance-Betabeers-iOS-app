@@ -38,6 +38,7 @@ Librerias de terceros
 ---------------------
 * [SVProgressHUD](https://github.com/samvermette/SVProgressHUD)
 * [SDWebImage](https://github.com/rs/SDWebImage)
+* [ActionSheetPicker](https://github.com/TimCinel/ActionSheetPicker)
 
 Creditos iconos
 ---------------
