@@ -425,7 +425,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="mWN-R4-RtJ">
-                                <rect key="frame" x="0.0" y="44" width="320" height="249"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="246"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15" borderStyle="roundedRect" minimumFontSize="17" id="vDS-m6-JMF">
@@ -457,7 +457,7 @@
                                             <outlet property="delegate" destination="QPr-SF-AFO" id="VhA-Ad-i16"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DEVISA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RJn-Ai-aJ8">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Divisa" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RJn-Ai-aJ8">
                                         <rect key="frame" x="14" y="337" width="97" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
