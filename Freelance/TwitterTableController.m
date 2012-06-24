@@ -123,7 +123,7 @@
     
     if (cell == nil) 
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TweetCell class]) owner:self options:nil];
         cell = [nib objectAtIndex:0];
         
     } 
