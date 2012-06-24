@@ -7,9 +7,40 @@
 //
 
 #import "ConfigController.h"
+
+#import <MessageUI/MessageUI.h>
+#import <Twitter/Twitter.h>
+
 #import "ActionSheetStringPicker.h"
 
-@interface ConfigController ()
+@interface ConfigController () <MFMailComposeViewControllerDelegate,UITextFieldDelegate>  {
+}
+
+
+@property (weak, nonatomic) IBOutlet UIStepper *ourStepper1;
+@property (weak, nonatomic) IBOutlet UIStepper *ourStepper2;
+
+@property (weak, nonatomic) IBOutlet UITextField *txt_iva;
+@property (weak, nonatomic) IBOutlet UITextField *txt_irpf;
+@property (weak, nonatomic) IBOutlet UITextField *txt_email;
+@property (weak, nonatomic) IBOutlet UITextField *txt_linkedin;
+@property (weak, nonatomic) IBOutlet UITextField *txt_name;
+@property (weak, nonatomic) IBOutlet UITextField *txt_cif;
+@property (weak, nonatomic) IBOutlet UITextField *txt_currency;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+
+- (IBAction)stepperValueChanged1:(id)sender;
+- (IBAction)stepperValueChanged2:(id)sender;
+- (IBAction)stepperValueChanged4:(id)sender;
+- (IBAction)stepperValueChanged5:(id)sender;
+- (IBAction)stepperValueChanged6:(id)sender;
+- (IBAction)stepperValueChanged7:(id)sender;
+
+
+/////////////////
+
+- (IBAction)rateApp:(id)sender;
+- (IBAction)sendEmailFeedback:(id)sender;
 
 @end
 
@@ -59,13 +90,7 @@
     
     self.scrollview.contentSize = CGSizeMake(self.scrollview.frame.size.width,380);
     
-    [self setBackground];
-    
-    
 }
-
-
-
 
 - (void)viewDidUnload {    
     self.ourStepper1 = nil;
@@ -86,14 +111,6 @@
 
 #pragma mark -
 #pragma mark Custom Methods
-
-
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
 
 - (void)showCurrencyPicker{
     
@@ -183,7 +200,7 @@
 
         MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
         [controller setSubject:@"Sugerencias Freelance Betabeers"];
-        [controller setToRecipients:[NSArray arrayWithObject:[NSString stringWithString:@"gafeman@gmail.com"]]];
+        [controller setToRecipients:[NSArray arrayWithObject:@"gafeman@gmail.com"]];
         [self presentModalViewController:controller animated:YES];
         controller.mailComposeDelegate = self;
 

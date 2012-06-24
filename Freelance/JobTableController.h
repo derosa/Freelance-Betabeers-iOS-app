@@ -6,19 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "SVProgressHUD.h"
+#import "BaseViewController.h"
 
-#include <netinet/in.h>
-#import <SystemConfiguration/SCNetworkReachability.h>
-
-@interface JobTableController : UIViewController <UIAlertViewDelegate>{
-    NSMutableArray *arrayC;
-    IBOutlet UITableView *tableView;
-}
-
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-
-- (IBAction)info:(id)sender;
+@interface JobTableController : BaseViewController
 
 @end

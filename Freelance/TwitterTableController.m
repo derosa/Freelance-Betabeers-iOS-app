@@ -7,50 +7,30 @@
 //
 
 #import "TwitterTableController.h"
-#import "SimpleTableCell.h"
+
+#import <Twitter/Twitter.h>
+
+#import "TweetCell.h"
 
 #import "TwitterDataProvider.h"
 
+@interface TwitterTableController ()  <UIAlertViewDelegate>{
+    NSArray *_tweets;
+    IBOutlet UITableView *tableView;
+    BOOL isRetina;
+}
 
-@interface TwitterTableController ()
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet TwitterDataProvider *twitterDataProvider;
+
+- (IBAction)newTweet:(id)sender;
+- (IBAction)refreshTweet:(id)sender;
 @end
 
 @implementation TwitterTableController
 @synthesize twitterDataProvider;
 
 @synthesize tableView;
-
-////////////////////
-
-- (BOOL)connectedToNetwork  {
-    // Create zero addy
-    struct sockaddr_in zeroAddress;
-    bzero(&zeroAddress, sizeof(zeroAddress));
-    zeroAddress.sin_len = sizeof(zeroAddress);
-    zeroAddress.sin_family = AF_INET;
-    // Recover reachability flags
-    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr*)&zeroAddress);
-    SCNetworkReachabilityFlags flags;
-    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
-    CFRelease(defaultRouteReachability);
-    if (!didRetrieveFlags)
-    {
-        NSLog(@"Error. Could not recover network reachability flags");
-        return 0;
-    }
-    BOOL isReachable = flags & kSCNetworkFlagsReachable;
-    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
-    //below suggested by Ariel
-    BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
-    NSURL *testURL = [NSURL URLWithString:@"http://www.apple.com/"]; //comment by friendlydeveloper: maybe use www.google.com
-    NSURLRequest *testRequest = [NSURLRequest requestWithURL:testURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20.0];
-    //NSURLConnection *testConnection = [[NSURLConnection alloc] initWithRequest:testRequest delegate:nil]; //suggested by Ariel
-    NSURLConnection *testConnection = [[NSURLConnection alloc] initWithRequest:testRequest delegate:nil]; //modified by friendlydeveloper
-    return ((isReachable && !needsConnection) || nonWiFi) ? (testConnection ? YES : NO) : NO;
-}
-
-////////////////////////////
 
 - (IBAction)newTweet:(id)sender
 {
@@ -80,8 +60,8 @@
         NSString *hashtag = @"freesos";
         int limit = 30;
         
-        [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag                                                               limit:limit completionBlock:^(NSArray *tweets) {
-            arrayC = tweets;
+        [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag limit:limit completionBlock:^(NSArray *tweets) {
+            _tweets = tweets;
             [tableView reloadData];
             [SVProgressHUD dismiss];
             
@@ -96,9 +76,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-
-    
     
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
         isRetina = YES;
@@ -130,7 +107,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayC count];
+    return [_tweets count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tabla cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,20 +115,20 @@
     static NSString *CellIdentifier = @"Cell";
     
     
-    SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TweetCell *cell = (TweetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
         
     
     if (cell == nil) 
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TweetCell class]) owner:self options:nil];
         cell = [nib objectAtIndex:0];
         
     } 
     
     
     
-    NSString *avatar_url = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"];
+    NSString *avatar_url = [[_tweets objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"];
     
     if( isRetina == YES ){
         avatar_url = [avatar_url stringByReplacingOccurrencesOfString:@"_normal" withString:@"_reasonably_small"];
@@ -160,15 +137,7 @@
     
     NSLog(@"%@",avatar_url);
     
-    [cell.thumbnailImageView setImageWithURL:[NSURL URLWithString:[[arrayC objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"]]  placeholderImage:[UIImage imageNamed:@"twitter.png"]];
-    
-
-
-
-
-	cell.nameLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"];
-
-    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];  
+    [cell setTweet:[_tweets objectAtIndex:indexPath.row]];
     
 
     return cell;
@@ -178,7 +147,7 @@
 {
     if( [TWTweetComposeViewController canSendTweet] ){
         
-        NSString *mensaje = [NSString stringWithFormat:@"@%@ ", [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"]];
+        NSString *mensaje = [NSString stringWithFormat:@"@%@ ", [[_tweets objectAtIndex:indexPath.row] objectForKey:@"from_user"]];
         TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
         [tweet setInitialText:mensaje];
         [self presentModalViewController:tweet animated:YES];
@@ -202,7 +171,7 @@
     static const CGFloat kTweetLabelWidth = 240.0f;
     static const CGFloat kCellHeightOffset = 35.0f;
     
-    NSString *cellValue = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
+    NSString *cellValue = [[_tweets objectAtIndex:indexPath.row] objectForKey:@"text"];
     
     CGSize size = [cellValue 
                    sizeWithFont:[UIFont systemFontOfSize:kTweetLabelFontSize]

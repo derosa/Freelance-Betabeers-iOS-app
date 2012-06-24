@@ -6,17 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <Twitter/Twitter.h>
+#import "BaseViewController.h"
 
-#include <netinet/in.h>
-#import <SystemConfiguration/SCNetworkReachability.h>
-
-@interface TipsController : UIViewController <UIAlertViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UILabel *consejo;
-
-- (IBAction)cargarFrase:(id)sender;
-- (IBAction)twittearConsejo:(id)sender;
+@interface TipsController : BaseViewController
 
 @end

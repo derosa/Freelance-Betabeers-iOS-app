@@ -8,7 +8,22 @@
 
 #import "JobViewController.h"
 
-@interface JobViewController ()
+#import <MessageUI/MessageUI.h>
+
+@interface JobViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+    
+    IBOutlet UIScrollView *scrollview;
+}
+
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *web;
+
+@property (strong, nonatomic) IBOutlet UILabel *titulo;
+@property (strong, nonatomic) IBOutlet UILabel *fecha;
+@property (strong, nonatomic) IBOutlet UILabel *descripcion;
+@property (strong, nonatomic) IBOutlet UIButton *btnReply;
+
+- (IBAction)replyJob:(id)sender;
 
 @end
 
@@ -17,20 +32,7 @@
 
 @synthesize job, titulo, fecha, descripcion, email, web, btnReply;
 
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
-////////////////////////////
-
 - (IBAction)replyJob:(id)sender{
-
-    
-
-    
-    
 
     UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle: @"Acción" delegate: self cancelButtonTitle: @"Cancelar" destructiveButtonTitle:nil otherButtonTitles: @"Responder",@"Enviar copia",nil];
 
@@ -114,8 +116,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
     
     self.titulo.text = [job objectForKey:@"title"];
     
@@ -143,10 +143,6 @@
     descripcion.numberOfLines = 0;
     [descripcion sizeToFit];
     
-
-    
-    [self setBackground];
-    
     
     scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,
                                         descripcion.frame.size.height+110);
@@ -159,17 +155,6 @@
 
 
     
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end
