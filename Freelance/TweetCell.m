@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SimpleTableCell.h"
+#import "TweetCell.h"
 
 #import "UIImageView+WebCache.h"
 
-@interface SimpleTableCell()
+@interface TweetCell()
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *prepTimeLabel;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation SimpleTableCell
+@implementation TweetCell
 
 @synthesize nameLabel = _nameLabel;
 @synthesize prepTimeLabel = _prepTimeLabel;

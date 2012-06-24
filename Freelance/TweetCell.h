@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SimpleTableCell : UITableViewCell
+@interface TweetCell : UITableViewCell
 
 - (void)setTweet:(NSDictionary *)tweet;
 

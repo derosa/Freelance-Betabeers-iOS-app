@@ -27,8 +27,8 @@
 		346CE49A159343200050417D /* icon_ 57.png in Resources */ = {isa = PBXBuildFile; fileRef = 346CE498159343200050417D /* icon_ 57.png */; };
 		346CE49B159343200050417D /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 346CE499159343200050417D /* icon.png */; };
 		349BDC28156EE96800800925 /* TwitterTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349BDC27156EE96800800925 /* TwitterTableController.m */; };
-		349BDC2D156EF9CA00800925 /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349BDC2C156EF9CA00800925 /* SimpleTableCell.xib */; };
-		349BDC30156EFA7D00800925 /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 349BDC2F156EFA7D00800925 /* SimpleTableCell.m */; };
+		349BDC2D156EF9CA00800925 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349BDC2C156EF9CA00800925 /* TweetCell.xib */; };
+		349BDC30156EFA7D00800925 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 349BDC2F156EFA7D00800925 /* TweetCell.m */; };
 		349BDC5E156F0B5900800925 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349BDC5D156F0B5900800925 /* ImageIO.framework */; };
 		349BDC60156F0B6C00800925 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349BDC5F156F0B6C00800925 /* MapKit.framework */; };
 		34AF1F09156B2350004AD777 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AF1F08156B2350004AD777 /* UIKit.framework */; };
@@ -87,9 +87,9 @@
 		346CE499159343200050417D /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		349BDC26156EE96200800925 /* TwitterTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTableController.h; sourceTree = "<group>"; };
 		349BDC27156EE96800800925 /* TwitterTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTableController.m; sourceTree = "<group>"; };
-		349BDC2C156EF9CA00800925 /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
-		349BDC2E156EFA7D00800925 /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
-		349BDC2F156EFA7D00800925 /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
+		349BDC2C156EF9CA00800925 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
+		349BDC2E156EFA7D00800925 /* TweetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = TweetCell.h; sourceTree = "<group>"; };
+		349BDC2F156EFA7D00800925 /* TweetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		349BDC5D156F0B5900800925 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		349BDC5F156F0B6C00800925 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		34AF1F04156B2350004AD777 /* Freelance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freelance.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,9 +193,9 @@
 				341C6F25156EA9FE009A8144 /* JobViewController.m */,
 				349BDC26156EE96200800925 /* TwitterTableController.h */,
 				349BDC27156EE96800800925 /* TwitterTableController.m */,
-				349BDC2C156EF9CA00800925 /* SimpleTableCell.xib */,
-				349BDC2E156EFA7D00800925 /* SimpleTableCell.h */,
-				349BDC2F156EFA7D00800925 /* SimpleTableCell.m */,
+				349BDC2C156EF9CA00800925 /* TweetCell.xib */,
+				349BDC2E156EFA7D00800925 /* TweetCell.h */,
+				349BDC2F156EFA7D00800925 /* TweetCell.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -416,7 +416,7 @@
 			files = (
 				34AF1F13156B2350004AD777 /* InfoPlist.strings in Resources */,
 				34AF1F1C156B2350004AD777 /* MainStoryboard.storyboard in Resources */,
-				349BDC2D156EF9CA00800925 /* SimpleTableCell.xib in Resources */,
+				349BDC2D156EF9CA00800925 /* TweetCell.xib in Resources */,
 				34412C1E156FD54A00D19091 /* tweet.png in Resources */,
 				34412C1F156FD54A00D19091 /* tweet@2x.png in Resources */,
 				34FA09F0157AD59700C2015F /* whitey.png in Resources */,
@@ -453,7 +453,7 @@
 				341C6F18156E91D2009A8144 /* JobTableController.m in Sources */,
 				341C6F26156EA9FE009A8144 /* JobViewController.m in Sources */,
 				349BDC28156EE96800800925 /* TwitterTableController.m in Sources */,
-				349BDC30156EFA7D00800925 /* SimpleTableCell.m in Sources */,
+				349BDC30156EFA7D00800925 /* TweetCell.m in Sources */,
 				DB6B7E4615939D0900DA5685 /* MKAnnotationView+WebCache.m in Sources */,
 				DB6B7E4715939D0900DA5685 /* SDImageCache.m in Sources */,
 				DB6B7E4815939D0900DA5685 /* SDWebImageDecoder.m in Sources */,

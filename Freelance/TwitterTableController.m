@@ -15,7 +15,7 @@
 #include <netinet/in.h>
 #import <SystemConfiguration/SCNetworkReachability.h>
 
-#import "SimpleTableCell.h"
+#import "TweetCell.h"
 
 #import "TwitterDataProvider.h"
 
@@ -151,7 +151,7 @@
     static NSString *CellIdentifier = @"Cell";
     
     
-    SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TweetCell *cell = (TweetCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
         
     
