@@ -10,14 +10,12 @@
 
 #import <Twitter/Twitter.h>
 
-#import "SVProgressHUD.h"
-
 #import "TweetCell.h"
 
 #import "TwitterDataProvider.h"
 
 @interface TwitterTableController ()  <UIAlertViewDelegate>{
-    NSArray *arrayC;
+    NSArray *_tweets;
     IBOutlet UITableView *tableView;
     BOOL isRetina;
 }
@@ -63,7 +61,7 @@
         int limit = 30;
         
         [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag limit:limit completionBlock:^(NSArray *tweets) {
-            arrayC = tweets;
+            _tweets = tweets;
             [tableView reloadData];
             [SVProgressHUD dismiss];
             
@@ -109,7 +107,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayC count];
+    return [_tweets count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tabla cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,7 +128,7 @@
     
     
     
-    NSString *avatar_url = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"];
+    NSString *avatar_url = [[_tweets objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"];
     
     if( isRetina == YES ){
         avatar_url = [avatar_url stringByReplacingOccurrencesOfString:@"_normal" withString:@"_reasonably_small"];
@@ -139,7 +137,7 @@
     
     NSLog(@"%@",avatar_url);
     
-    [cell setTweet:[arrayC objectAtIndex:indexPath.row]];
+    [cell setTweet:[_tweets objectAtIndex:indexPath.row]];
     
 
     return cell;
@@ -149,7 +147,7 @@
 {
     if( [TWTweetComposeViewController canSendTweet] ){
         
-        NSString *mensaje = [NSString stringWithFormat:@"@%@ ", [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"]];
+        NSString *mensaje = [NSString stringWithFormat:@"@%@ ", [[_tweets objectAtIndex:indexPath.row] objectForKey:@"from_user"]];
         TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
         [tweet setInitialText:mensaje];
         [self presentModalViewController:tweet animated:YES];
@@ -173,7 +171,7 @@
     static const CGFloat kTweetLabelWidth = 240.0f;
     static const CGFloat kCellHeightOffset = 35.0f;
     
-    NSString *cellValue = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];
+    NSString *cellValue = [[_tweets objectAtIndex:indexPath.row] objectForKey:@"text"];
     
     CGSize size = [cellValue 
                    sizeWithFont:[UIFont systemFontOfSize:kTweetLabelFontSize]
