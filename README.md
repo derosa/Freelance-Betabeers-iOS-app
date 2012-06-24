@@ -10,7 +10,7 @@ TO-DO 1.1
 * tabla tweets no se ajusta (ok)
 * mejorar diseño (icono, colores interfaz)
 * elegir divisa (ok)
-* limpiar código duplicado entre controladores (setBackground, connectedToNetwork)
+* limpiar código duplicado entre controladores (setBackground, connectedToNetwork) (ok)
 
 Opensource
 ----------
