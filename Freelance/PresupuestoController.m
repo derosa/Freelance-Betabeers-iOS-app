@@ -54,30 +54,9 @@
 @implementation PresupuestoController
 
 @synthesize
-    ourStepper1,
-    ourStepper2,
-    ourStepper3,
-    ourStepper4,
-    ourStepper5,
-    ourStepper6,
-
-    stepperValueText1,
-    stepperValueText2,
-    stepperValueText3,
-    stepperValueText4,
-    stepperValueText5,
-    stepperValueText6,
-
-    txtHoras,
-    txtBase,
-    txtIVA,
-    txtIRPF,
-    txtTotal,
-
-    lblIVA,
-    lblIRPF,
-
-    switchIRPF;
+    ourStepper1, ourStepper2, ourStepper3,ourStepper4, ourStepper5, ourStepper6,
+    stepperValueText1, stepperValueText2, stepperValueText3, stepperValueText4, stepperValueText5, stepperValueText6,
+    txtHoras, txtBase, txtIVA, txtIRPF, txtTotal, lblIVA, lblIRPF, switchIRPF;
 
 // http://cocoadev.com/wiki/NSLog
 // http://www.ioslearner.com/uistepper-tutorial-example-sample-cod/
