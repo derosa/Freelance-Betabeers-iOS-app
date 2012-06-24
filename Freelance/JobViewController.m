@@ -18,12 +18,11 @@
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *web;
 
-@property (strong, nonatomic) IBOutlet UILabel *titulo;
-@property (strong, nonatomic) IBOutlet UILabel *fecha;
-@property (strong, nonatomic) IBOutlet UILabel *descripcion;
-@property (strong, nonatomic) IBOutlet UIButton *btnReply;
+@property (weak, nonatomic) IBOutlet UILabel *titulo;
+@property (weak, nonatomic) IBOutlet UILabel *fecha;
+@property (weak, nonatomic) IBOutlet UILabel *descripcion;
+@property (weak, nonatomic) IBOutlet UIButton *btnReply;
 
-- (IBAction)replyJob:(id)sender;
 
 @end
 
@@ -32,15 +31,71 @@
 
 @synthesize job, titulo, fecha, descripcion, email, web, btnReply;
 
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.titulo.text = [job objectForKey:@"title"];
+    
+    
+    
+    
+    if( [[job objectForKey:@"interested"] isEqualToString: @"0"] )
+    {
+        self.fecha.text = [job objectForKey:@"date"];
+    }else{
+        self.fecha.text = [NSString stringWithFormat:@"%@ - %@ interesados", [job objectForKey:@"date"], [job objectForKey:@"interested"]];
+    }
+    
+    
+    
+    self.title = [job objectForKey:@"company"];
+    
+    
+    
+    self.descripcion.text = [job objectForKey:@"body"];
+    email = [job objectForKey:@"email"];
+    web = [job objectForKey:@"url"];
+    
+    
+    descripcion.numberOfLines = 0;
+    [descripcion sizeToFit];
+    
+    
+    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,
+                                        descripcion.frame.size.height+110);
+    
+    
+    
+    
+    
+    btnReply.frame = CGRectMake(btnReply.frame.origin.x, (descripcion.frame.size.height + 35), btnReply.frame.size.width, btnReply.frame.size.height);
+    
+    
+    
+}
+
+
+#pragma mark -
+#pragma mark IBActions
+
+
 - (IBAction)replyJob:(id)sender{
 
     UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle: @"Acción" delegate: self cancelButtonTitle: @"Cancelar" destructiveButtonTitle:nil otherButtonTitles: @"Responder",@"Enviar copia",nil];
 
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	
-    [popupQuery showInView:self.view];
+    [popupQuery showInView:self.tabBarController.view];
 
 }
+
+
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
@@ -53,7 +108,7 @@
     
     // reply
 	if (buttonIndex == 0) {
-
+        
         to = [NSString stringWithString:email];
         subject = [NSString stringWithFormat:@"RE: %@", self.titulo.text];
         NSString *linkedin = [prefs stringForKey:@"linkedin"];
@@ -70,7 +125,7 @@
         }
         
         
-    // copy
+        // copy
     } else if (buttonIndex == 1) {
 		
         to = [prefs stringForKey:@"email"];
@@ -82,7 +137,7 @@
     
     
     if (buttonIndex != 2) {
-            
+        
         if ([MFMailComposeViewController canSendMail]) {
             
             MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
@@ -105,7 +160,8 @@
 	
 }
 
-
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [self dismissModalViewControllerAnimated:YES];
@@ -113,48 +169,5 @@
 
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.titulo.text = [job objectForKey:@"title"];
-    
-
-    
-    
-    if( [[job objectForKey:@"interested"] isEqualToString: @"0"] )
-    {
-        self.fecha.text = [job objectForKey:@"date"];
-    }else{
-        self.fecha.text = [NSString stringWithFormat:@"%@ - %@ interesados", [job objectForKey:@"date"], [job objectForKey:@"interested"]];
-    }
-    
-    
-    
-    self.title = [job objectForKey:@"company"];
-    
-
-    
-    self.descripcion.text = [job objectForKey:@"body"];
-    email = [job objectForKey:@"email"];
-    web = [job objectForKey:@"url"];
-    
-    
-    descripcion.numberOfLines = 0;
-    [descripcion sizeToFit];
-    
-    
-    scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,
-                                        descripcion.frame.size.height+110);
-    
-    
-    
-    
-
-    btnReply.frame = CGRectMake(btnReply.frame.origin.x, (descripcion.frame.size.height + 35), btnReply.frame.size.width, btnReply.frame.size.height);
-
-
-    
-}
 
 @end

@@ -11,20 +11,17 @@
 
 #import "JobsDataProvider.h"
 
-@interface JobTableController () <UIAlertViewDelegate> {
-    NSArray *_jobs;
-}
+@interface JobTableController () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet JobsDataProvider *jobsDataProvider;
-
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-
-- (IBAction)info:(id)sender;
+@property (nonatomic, retain) NSArray *jobs;
 
 @end
 
 @implementation JobTableController
 @synthesize jobsDataProvider;
+@synthesize jobs = _jobs;
 
 @synthesize tableView;
 
@@ -37,10 +34,11 @@
         
         [SVProgressHUD show];
         
+        __weak JobTableController *weakSelf = self;
         [self.jobsDataProvider requestJobsWithCompletionBlock:^(NSArray *jobs) {
-            _jobs = jobs;
+            weakSelf.jobs = jobs;
             
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
             
             [SVProgressHUD dismiss];
         }];
@@ -71,7 +69,7 @@
         JobViewController *destination = [segue destinationViewController];
         NSIndexPath * indexPath = (NSIndexPath*)sender;
         
-        destination.job = [_jobs objectAtIndex:[indexPath row]];
+        destination.job = [self.jobs objectAtIndex:[indexPath row]];
     }
 }
 
@@ -102,7 +100,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_jobs count];
+    return [self.jobs count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -112,7 +110,7 @@
     static const CGFloat kJobTitleWidth = 300.f;
     static const CGFloat kJobTitleVerticalMargin = 10.f;
     
-    NSString *jobTitle = [[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
+    NSString *jobTitle = [[self.jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
     CGSize size = [jobTitle sizeWithFont:[UIFont systemFontOfSize:kJobTitleLabelFontSize] constrainedToSize:CGSizeMake(kJobTitleWidth, CGFLOAT_MAX)];
     
     return MAX(kCellMinHeight, size.height + kJobTitleVerticalMargin);
@@ -129,7 +127,7 @@
         cell.textLabel.numberOfLines = 0;
     }
     
-	NSString *cellValue =[[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
+	NSString *cellValue =[[self.jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
 	cell.textLabel.text = cellValue ;
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     
