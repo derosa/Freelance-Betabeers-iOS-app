@@ -123,6 +123,7 @@
 		791456AD15966B670061DDAA /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetStringPicker.m; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetStringPicker.m; sourceTree = "<group>"; };
 		791456AE15966B670061DDAA /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistancePickerView.h; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.h; sourceTree = "<group>"; };
 		791456AF15966B670061DDAA /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistancePickerView.m; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.m; sourceTree = "<group>"; };
+		793398631596986000E23943 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		DB6B7E3215939D0900DA5685 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		DB6B7E3315939D0900DA5685 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		DB6B7E3415939D0900DA5685 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -396,6 +397,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 			);
 			mainGroup = 34AF1EF9156B2350004AD777;
 			productRefGroup = 34AF1F05156B2350004AD777 /* Products */;
@@ -485,6 +487,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34AF1F1B156B2350004AD777 /* en */,
+				793398631596986000E23943 /* es */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
