@@ -176,7 +176,7 @@
     static const CGFloat kJobTitleVerticalMargin = 10.f;
     
     NSString *jobTitle = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"title"];
-    CGSize size = [jobTitle sizeWithFont:[UIFont boldSystemFontOfSize:kJobTitleLabelFontSize] constrainedToSize:CGSizeMake(kJobTitleWidth, CGFLOAT_MAX)];
+    CGSize size = [jobTitle sizeWithFont:[UIFont systemFontOfSize:kJobTitleLabelFontSize] constrainedToSize:CGSizeMake(kJobTitleWidth, CGFLOAT_MAX)];
     
     return MAX(kCellMinHeight, size.height + kJobTitleVerticalMargin);
 }
@@ -194,7 +194,7 @@
     
 	NSString *cellValue =[[arrayC objectAtIndex:indexPath.row] objectForKey:@"title"];
 	cell.textLabel.text = cellValue ;
-    
+    cell.textLabel.font = [UIFont systemFontOfSize:18];
     
     return cell;
 }

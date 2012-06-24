@@ -221,7 +221,7 @@
     if (buttonIndex == 0){
         //consejo.text = @"Error no se pudieron cargar los contenidos";
     }else{
-        #warning llamar a viewDidAppear es una CHAPUZA
+        //#warning llamar a viewDidAppear es una CHAPUZA
         [self viewDidAppear:YES];
     }
 }
