@@ -24,10 +24,6 @@
 
 - (IBAction)info:(id)sender;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 @end
 
 @implementation JobTableController
@@ -82,12 +78,6 @@
     
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -172,7 +162,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return[arrayC count];
+    return [arrayC count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

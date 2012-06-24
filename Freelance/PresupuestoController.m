@@ -299,12 +299,6 @@
     
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    

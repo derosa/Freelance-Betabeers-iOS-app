@@ -98,7 +98,7 @@
         NSString *hashtag = @"freesos";
         int limit = 30;
         
-        [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag                                                               limit:limit completionBlock:^(NSArray *tweets) {
+        [self.twitterDataProvider requestTweetSearchWithQueryString:hashtag limit:limit completionBlock:^(NSArray *tweets) {
             arrayC = tweets;
             [tableView reloadData];
             [SVProgressHUD dismiss];
@@ -114,9 +114,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-
-    
     
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
         isRetina = YES;
