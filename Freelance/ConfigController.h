@@ -11,22 +11,20 @@
 #import <Twitter/Twitter.h>
 
 @interface ConfigController : UIViewController <MFMailComposeViewControllerDelegate,UITextFieldDelegate>  {
-    IBOutlet UIScrollView *scrollview;
 }
 
 
-@property (strong, nonatomic) IBOutlet UIStepper *ourStepper1;
-@property (strong, nonatomic) IBOutlet UIStepper *ourStepper2;
+@property (weak, nonatomic) IBOutlet UIStepper *ourStepper1;
+@property (weak, nonatomic) IBOutlet UIStepper *ourStepper2;
 
-@property (strong, nonatomic) IBOutlet UITextField *txt_iva;
-@property (strong, nonatomic) IBOutlet UITextField *txt_irpf;
-@property (strong, nonatomic) IBOutlet UITextField *txt_email;
-@property (strong, nonatomic) IBOutlet UITextField *txt_linkedin;
-@property (strong, nonatomic) IBOutlet UITextField *txt_name;
-@property (strong, nonatomic) IBOutlet UITextField *txt_cif;
+@property (weak, nonatomic) IBOutlet UITextField *txt_iva;
+@property (weak, nonatomic) IBOutlet UITextField *txt_irpf;
+@property (weak, nonatomic) IBOutlet UITextField *txt_email;
+@property (weak, nonatomic) IBOutlet UITextField *txt_linkedin;
+@property (weak, nonatomic) IBOutlet UITextField *txt_name;
+@property (weak, nonatomic) IBOutlet UITextField *txt_cif;
 @property (weak, nonatomic) IBOutlet UITextField *txt_currency;
-@property (nonatomic, assign) IBOutlet UIScrollView *scrollview;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
 - (IBAction)stepperValueChanged1:(id)sender;
 - (IBAction)stepperValueChanged2:(id)sender;

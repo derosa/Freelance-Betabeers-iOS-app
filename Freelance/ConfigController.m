@@ -57,7 +57,7 @@
     self.txt_linkedin.text = linkedin;    
     self.txt_currency.text = [prefs objectForKey:@"divisa"];
     
-    self.scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,380);
+    self.scrollview.contentSize = CGSizeMake(self.scrollview.frame.size.width,380);
     
     [self setBackground];
     
@@ -67,8 +67,18 @@
 
 
 
-- (void)viewDidUnload {
-    [self setTxt_currency:nil];
+- (void)viewDidUnload {    
+    self.ourStepper1 = nil;
+    self.ourStepper2 = nil;
+    self.txt_iva = nil;
+    self.txt_irpf = nil;
+    self.txt_email = nil;
+    self.txt_linkedin = nil;
+    self.txt_name = nil;
+    self.txt_cif = nil;
+    self.txt_currency = nil;
+    self.scrollview = nil;
+
     [super viewDidUnload];
 }
 
@@ -161,11 +171,7 @@
 - (IBAction)rateApp:(id)sender
 {
 
-    int appId = 535827516;
-    NSString *reviewURL = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=535827516", appId];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:reviewURL]];
-    
-
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=535827516"]];
 
 }
 
