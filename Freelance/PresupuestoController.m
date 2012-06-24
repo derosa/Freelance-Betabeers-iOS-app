@@ -8,6 +8,8 @@
 
 #import "PresupuestoController.h"
 
+#import "NSString+Base64String.h"
+
 @interface PresupuestoController () <MFMailComposeViewControllerDelegate> {
     IBOutlet UIScrollView *scrollview;
 }
@@ -72,13 +74,9 @@
     int irpf = [prefs integerForKey:@"irpf"];
     NSString *divisa = [prefs stringForKey:@"divisa"];
     
-    
     float p1 = ((float)iva / 100);
     float p2 = ((float)irpf / 100);    
     
-    
-    //NSLog(@"iva %d (%f) - irpf %d (%f)",iva,p1,irpf,p2);
-
     precio_hora = ourStepper1.value;
     
     horas = [self.stepperValueText2.text intValue];
@@ -91,28 +89,13 @@
     self.txtBase.text = [NSString stringWithFormat:@"%d %@", (horas * precio_hora), divisa];
     self.txtIVA.text = [NSString stringWithFormat:@"%.2lf %@", ([self.txtBase.text floatValue] * p1), divisa ];
     self.txtIRPF.text = [NSString stringWithFormat:@"%.2lf %@", ([self.txtBase.text floatValue] * p2), divisa ];
-    
-    
-
-    
-
-    
-    
-    if( self.switchIRPF.on == TRUE ){
+        
+    if (self.switchIRPF.on)
         sum_irpf = [self.txtIRPF.text floatValue];
-        
-    }else{
+    else
         sum_irpf = 0;
-        
-    }
     
-    
-    self.txtTotal.text = [NSString stringWithFormat:@"%.2lf %@", ( ( [self.txtBase.text floatValue] + [self.txtIVA.text floatValue] ) - sum_irpf ), divisa ];
-
-    
-    
-    
-    
+    self.txtTotal.text = [NSString stringWithFormat:@"%.2lf %@", (([self.txtBase.text floatValue] + [self.txtIVA.text floatValue]) - sum_irpf) , divisa];
 }
 
 - (IBAction)stepperValueChanged1:(id)sender 
@@ -164,64 +147,20 @@
 - (IBAction)switchIRPFValueChanged:(id)sender 
 {
     [self sumar];
-}
-
-
-
-- (NSString *)base64String:(NSString *)str
-{
-    NSData *theData = [str dataUsingEncoding: NSASCIIStringEncoding];
-    const uint8_t* input = (const uint8_t*)[theData bytes];
-    NSInteger length = [theData length];
-    
-    static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-    
-    NSMutableData* data = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
-    uint8_t* output = (uint8_t*)data.mutableBytes;
-    
-    NSInteger i;
-    for (i=0; i < length; i += 3) {
-        NSInteger value = 0;
-        NSInteger j;
-        for (j = i; j < (i + 3); j++) {
-            value <<= 8;
-            
-            if (j < length) {
-                value |= (0xFF & input[j]);
-            }
-        }
-        
-        NSInteger theIndex = (i / 3) * 4;
-        output[theIndex + 0] =                    table[(value >> 18) & 0x3F];
-        output[theIndex + 1] =                    table[(value >> 12) & 0x3F];
-        output[theIndex + 2] = (i + 1) < length ? table[(value >> 6)  & 0x3F] : '=';
-        output[theIndex + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
-    }
-    
-    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-}
-
-
-
-    
+}  
 
 - (IBAction)sendEmail:(id)sender
-{
-        
+{        
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
     int iva = [prefs integerForKey:@"iva"];
     int irpf = [prefs integerForKey:@"irpf"];
     NSString *name = [prefs stringForKey:@"name"];
     NSString *cif = [prefs stringForKey:@"cif"];
-    
 
-    if( switchIRPF.on == NO ) irpf = 0;
+    if (!switchIRPF.on)
+        irpf = 0;
     
-    NSString *values = [self base64String: [NSString stringWithFormat:@"%@;%@;%@;%d;%d;%@;%@;%@;%@;%@", name, cif, self.stepperValueText1.text, iva, irpf, self.stepperValueText2.text, self.stepperValueText3.text, self.stepperValueText4.text, self.stepperValueText5.text, self.stepperValueText6.text]];
-    
-
-    NSLog(@"%@",[NSString stringWithFormat:@"%@;%@;%@;%d;%d;%@;%@;%@;%@;%@", name, cif, self.stepperValueText1.text, iva, irpf, self.stepperValueText2.text, self.stepperValueText3.text, self.stepperValueText4.text, self.stepperValueText5.text, self.stepperValueText6.text]);
-    
+    NSString *values = [[NSString stringWithFormat:@"%@;%@;%@;%d;%d;%@;%@;%@;%@;%@", name, cif, self.stepperValueText1.text, iva, irpf, self.stepperValueText2.text, self.stepperValueText3.text, self.stepperValueText4.text, self.stepperValueText5.text, self.stepperValueText6.text] base64String];
 
     if ([MFMailComposeViewController canSendMail]) {
         
@@ -232,15 +171,12 @@
         [self presentModalViewController:controller animated:YES];
         controller.mailComposeDelegate = self;
         
-        NSLog(@"%@%@", url, values);
-        
-    }else{
+    } else {
         
         UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Para enviar sugerencias antes tienes que configurar una cuenta de correo" delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-        [someError show];
         
+        [someError show];
     }
-    
 }
 
 
@@ -249,18 +185,16 @@
 }
 
 
-////////////////
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    #warning esto es una chapuza.... este controlador no tiene por que saber que otros controladores hay y en que orden estan...
     [[[[[self tabBarController] tabBar] items] objectAtIndex:1] setBadgeValue:@"1"];
+    
     [self sumar];
     
-
     scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,250);
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated

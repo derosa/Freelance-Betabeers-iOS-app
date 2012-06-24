@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D8EE0A51596DEC500CFF08A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A41596DEC500CFF08A /* BaseViewController.m */; };
+		1D8EE0A91596E01E00CFF08A /* NSString+Base64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */; };
 		1DA3B67215963D3200C85842 /* TwitterDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3B67115963D3200C85842 /* TwitterDataProvider.m */; };
 		341C6EE5156C6F77009A8144 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341C6EE4156C6F77009A8144 /* Twitter.framework */; };
 		341C6F18156E91D2009A8144 /* JobTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341C6F17156E91D2009A8144 /* JobTableController.m */; };
@@ -66,6 +67,8 @@
 /* Begin PBXFileReference section */
 		1D8EE0A31596DEC500CFF08A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1D8EE0A41596DEC500CFF08A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		1D8EE0A71596E01E00CFF08A /* NSString+Base64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64String.h"; sourceTree = "<group>"; };
+		1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64String.m"; sourceTree = "<group>"; };
 		1DA3B67015963D3200C85842 /* TwitterDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterDataProvider.h; sourceTree = "<group>"; };
 		1DA3B67115963D3200C85842 /* TwitterDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterDataProvider.m; sourceTree = "<group>"; };
 		341C6EE4156C6F77009A8144 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -171,6 +174,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D8EE0A61596E00D00CFF08A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1D8EE0A71596E01E00CFF08A /* NSString+Base64String.h */,
+				1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		1DA3B66D15963CE700C85842 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +295,7 @@
 				34AF1F18156B2350004AD777 /* AppDelegate.m */,
 				1DA3B66F15963CF000C85842 /* ViewControllers */,
 				1DA3B66D15963CE700C85842 /* Model */,
+				1D8EE0A61596E00D00CFF08A /* Categories */,
 				DB6B7E1315939B5300DA5685 /* Dependencies */,
 				341C6F29156EC2E4009A8144 /* icons */,
 				347EB38E156B3C8C0016BA92 /* images */,
@@ -475,6 +488,7 @@
 				791456B315966B670061DDAA /* ActionSheetStringPicker.m in Sources */,
 				791456B415966B670061DDAA /* DistancePickerView.m in Sources */,
 				1D8EE0A51596DEC500CFF08A /* BaseViewController.m in Sources */,
+				1D8EE0A91596E01E00CFF08A /* NSString+Base64String.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
