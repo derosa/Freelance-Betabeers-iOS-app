@@ -7,3 +7,6 @@
 [submodule "Freelance/Dependencies/ActionSheetPicker"]
 	path = Freelance/Dependencies/ActionSheetPicker
 	url = https://github.com/TimCinel/ActionSheetPicker.git
+[submodule "Freelance/Dependencies/JSReachability"]
+	path = Freelance/Dependencies/JSReachability
+	url = git://github.com/JaviSoto/JSReachability.git

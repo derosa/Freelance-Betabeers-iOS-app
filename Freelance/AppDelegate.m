@@ -8,13 +8,24 @@
 
 #import "AppDelegate.h"
 
+#import "JSReachability.h"
+
+@interface AppDelegate() <JSReachabilityDelegate>
+@property (nonatomic, strong) JSReachability *reachability;
+@property (nonatomic, assign, readwrite) BOOL connectedToNetwork;
+@end
+
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize reachability = _reachability;
+@synthesize connectedToNetwork = _connectedToNetwork;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.reachability = [JSReachability reachabilityWithHost:@"google.com" delegate:self];
+    [self.reachability start];
+    
     return YES;
 }
 							
@@ -43,6 +54,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - JSReachabilityDelegate
+
+- (void)reachabilityService:(JSReachability *)reachability host:(NSString *)host didBecomeReachable:(BOOL)reachable
+{
+    self.connectedToNetwork = reachable;
 }
 
 @end

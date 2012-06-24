@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "AppDelegate.h"
 
 @interface BaseViewController ()
 
@@ -14,10 +15,19 @@
 
 @implementation BaseViewController
 
+#pragma mark - View Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];    
 }
 
+#pragma mark - Reachability
+
+- (BOOL)connectedToNetwork {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    return appDelegate.connectedToNetwork;
+}
 @end

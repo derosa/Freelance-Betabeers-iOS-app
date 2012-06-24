@@ -8,4 +8,6 @@
 
 @interface BaseViewController : UIViewController
 
+- (BOOL)connectedToNetwork;
+
 @end
