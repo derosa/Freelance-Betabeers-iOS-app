@@ -9,12 +9,16 @@
 #import "JobTableController.h"
 #import "JobViewController.h"
 
+#import "JobsDataProvider.h"
+
 
 @interface JobTableController ()
+@property (strong, nonatomic) IBOutlet JobsDataProvider *jobsDataProvider;
 
 @end
 
 @implementation JobTableController
+@synthesize jobsDataProvider;
 
 @synthesize tableView;
 
@@ -36,34 +40,15 @@
         
         [SVProgressHUD show];
         
-        NSString *url = @"http://migueldev.com/freelance/trabajos.php";
-        //TODO: should be done asynchronously
-        NSData *items = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        NSInputStream *stream = [[NSInputStream alloc] initWithData:items];
-        [stream open];
+        [self.jobsDataProvider requestJobsWithCompletionBlock:^(NSArray *jobs) {
+            arrayC = jobs;
+            
+            [self.tableView reloadData];
+            
+            [SVProgressHUD dismiss];
+        }];
         
-        if (stream) {
-            
-            arrayC = [[NSMutableArray alloc] init];
-            
-            NSError *parseError = nil;
-            id jsonObject = [NSJSONSerialization JSONObjectWithStream:stream options:NSJSONReadingAllowFragments error:&parseError];
-            
-            NSArray *items = [[jsonObject objectForKey:@"response"] objectForKey:@"jobs"];
-            [items enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
-                [arrayC addObject:item];
-            }];
-            
-            [self.tableView reloadData]; 
-            
-        } else {
-            NSLog(@"Failed to open stream.");
-        }
-        
-        [SVProgressHUD dismiss];
-        
-        
-    }else{
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
         [alert show];
     }
@@ -79,6 +64,7 @@
 
 - (void)viewDidUnload
 {
+    [self setJobsDataProvider:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

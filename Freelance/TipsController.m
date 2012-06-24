@@ -8,11 +8,15 @@
 
 #import "TipsController.h"
 
+#import "TipsDataProvider.h"
+
 @interface TipsController ()
+@property (strong, nonatomic) IBOutlet TipsDataProvider *tipsDataProvider;
 
 @end
 
 @implementation TipsController
+@synthesize tipsDataProvider;
 
 @synthesize consejo;
 
@@ -76,17 +80,12 @@
 
 - (void) cargarFrase
 {
-    NSString *url = @"http://migueldev.com/freelance/consejos.php";
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    // si carga la misma frase, cargar otra
-    if( [response isEqualToString: self.consejo.text] )
-    {
-        [self cargarFrase];
-    }else{
-        self.consejo.text = response;
-    }
+    [self.tipsDataProvider requestTipWithCompletionBlock:^(NSString *tip) {
+        if ([tip isEqualToString:self.consejo.text])
+            [self cargarFrase]; // si carga la misma frase, cargar otra
+        else
+            self.consejo.text = tip;
+    }];
 }
 
 - (void)viewDidLoad
@@ -117,4 +116,8 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setTipsDataProvider:nil];
+    [super viewDidUnload];
+}
 @end
