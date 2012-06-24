@@ -25,9 +25,53 @@
 
 @synthesize tableView;
 
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDataIfVisible) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
+    [self refreshData];
+    
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
+- (void)viewDidUnload{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"getJob"]) 
+    {
+        JobViewController *destination = [segue destinationViewController];
+        NSIndexPath * indexPath = (NSIndexPath*)sender;
+        
+        destination.job = [self.jobs objectAtIndex:[indexPath row]];
+    }
+}
+
+
+#pragma mark -
+#pragma mark Custom Methods
+
+- (void)refreshData{
     
     //TODO: check connection only on request fail, it's not a flight ticket :)
     if ([self connectedToNetwork] ) {
@@ -47,39 +91,15 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
         [alert show];
     }
-    
 }
 
-
-- (void)viewDidDisappear:(BOOL)animated{
+- (void)refreshDataIfVisible{
     
-    [super viewDidDisappear:animated];
-    [SVProgressHUD dismiss];
-}
-
-
-#pragma mark -
-#pragma mark Custom Methods
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"getJob"]) 
-    {
-        JobViewController *destination = [segue destinationViewController];
-        NSIndexPath * indexPath = (NSIndexPath*)sender;
-        
-        destination.job = [self.jobs objectAtIndex:[indexPath row]];
+    if (self.tabBarController.selectedViewController == self.navigationController) {
+        [self refreshData];
     }
 }
 
-
-
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != 0){
-        [self viewDidAppear:YES];
-    }
-}
 
 #pragma mark -
 #pragma mark IBActions
@@ -92,7 +112,17 @@
 }
 
 
-//////////////
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0){
+        [self viewDidAppear:YES];
+    }
+}
+
+
 
 #pragma mark -
 #pragma mark UITableViewdataSource & UITableViewDelegate
@@ -125,11 +155,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont systemFontOfSize:18];
     }
     
 	NSString *cellValue =[[self.jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
 	cell.textLabel.text = cellValue ;
-    cell.textLabel.font = [UIFont systemFontOfSize:18];
     
     return cell;
 }
