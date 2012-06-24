@@ -47,6 +47,7 @@
 }
 
 - (void)viewDidUnload{
+    [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
@@ -118,7 +119,7 @@
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0){
-        [self viewDidAppear:YES];
+        [self refreshData];
     }
 }
 
