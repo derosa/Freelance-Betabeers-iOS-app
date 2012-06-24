@@ -76,12 +76,6 @@
     [SVProgressHUD dismiss];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-
 
 #pragma mark -
 #pragma mark Custom Methods

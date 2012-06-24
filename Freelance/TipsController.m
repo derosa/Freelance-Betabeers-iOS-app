@@ -67,7 +67,7 @@
      if ([self connectedToNetwork]) {
         [self cargarFrase];
         [[[[[self tabBarController] tabBar] items] objectAtIndex:1]  setBadgeValue:nil];
-     }else{
+     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
         [alert show];
     }

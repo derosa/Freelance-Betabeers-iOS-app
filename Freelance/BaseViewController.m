@@ -30,4 +30,12 @@
     
     return appDelegate.connectedToNetwork;
 }
+
+#pragma mark -
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
 @end
