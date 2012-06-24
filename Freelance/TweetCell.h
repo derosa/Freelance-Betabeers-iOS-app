@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface TweetCell : UITableViewCell
 
 - (void)setTweet:(NSDictionary *)tweet;

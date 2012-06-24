@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface JobViewController : UIViewController
+@interface JobViewController : BaseViewController
 
 @property (strong, nonatomic) NSDictionary *job;
 

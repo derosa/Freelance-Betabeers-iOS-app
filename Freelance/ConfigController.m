@@ -90,9 +90,6 @@
     
     self.scrollview.contentSize = CGSizeMake(self.scrollview.frame.size.width,380);
     
-    [self setBackground];
-    
-    
 }
 
 
@@ -117,14 +114,6 @@
 
 #pragma mark -
 #pragma mark Custom Methods
-
-
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
 
 - (void)showCurrencyPicker{
     

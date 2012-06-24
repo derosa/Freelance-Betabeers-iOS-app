@@ -26,13 +26,6 @@
 
 @synthesize consejo;
 
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
-
 - (BOOL)connectedToNetwork  {
     // Create zero addy
     struct sockaddr_in zeroAddress;
@@ -97,13 +90,6 @@
     }else{
         self.consejo.text = response;
     }
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self setBackground];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

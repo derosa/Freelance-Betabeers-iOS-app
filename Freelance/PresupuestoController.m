@@ -8,8 +8,6 @@
 
 #import "PresupuestoController.h"
 
-#import <MessageUI/MessageUI.h>
-
 @interface PresupuestoController () <MFMailComposeViewControllerDelegate> {
     IBOutlet UIScrollView *scrollview;
 }
@@ -64,23 +62,11 @@
 // http://stackoverflow.com/questions/1949475/iphone-code-change-the-tabbar-badge-value-from-the-viewcontrollers
 // http://stackoverflow.com/questions/1113408/limit-a-double-to-two-decimal-places
 
-
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
-////////////////////////////
-
-
 - (void)sumar
 {
     int precio_hora, horas;
     float sum_irpf;
-    
-    
-    
+        
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
     int iva = [prefs integerForKey:@"iva"];
     int irpf = [prefs integerForKey:@"irpf"];
@@ -271,7 +257,6 @@
 
     [[[[[self tabBarController] tabBar] items] objectAtIndex:1] setBadgeValue:@"1"];
     [self sumar];
-    [self setBackground];
     
 
     scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,250);

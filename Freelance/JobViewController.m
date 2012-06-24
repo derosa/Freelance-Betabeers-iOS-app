@@ -32,20 +32,7 @@
 
 @synthesize job, titulo, fecha, descripcion, email, web, btnReply;
 
-////////////////////////////
-
-- (void)setBackground{
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"whitey.png"]];
-}
-
-////////////////////////////
-
 - (IBAction)replyJob:(id)sender{
-
-    
-
-    
-    
 
     UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle: @"Acción" delegate: self cancelButtonTitle: @"Cancelar" destructiveButtonTitle:nil otherButtonTitles: @"Responder",@"Enviar copia",nil];
 
@@ -155,10 +142,6 @@
     
     descripcion.numberOfLines = 0;
     [descripcion sizeToFit];
-    
-
-    
-    [self setBackground];
     
     
     scrollview.contentSize = CGSizeMake(scrollview.frame.size.width,
