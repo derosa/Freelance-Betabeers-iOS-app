@@ -19,19 +19,25 @@ Opensource
 
 Instalación
 -----------
-* git clone git://github.com/miquelcamps/Freelance-Betabeers-iOS-app.git
-* git submodule init
-* git submodule update
+
+```bash
+$ git clone git://github.com/miquelcamps/Freelance-Betabeers-iOS-app.git
+$ git submodule init
+$ git submodule update
+```
 
 Metodo de emergencia
 --------------------
 si quieres volver a la ultima versión, borra el contenido de la carpeta del repo y ejecuta
-git reset --hard HEAD
+
+```bash
+$ git reset --hard HEAD
+```
 
 Librerias de terceros
 ---------------------
-* SVProgressHUD
-* SDWebImage
+* [SVProgressHUD](https://github.com/samvermette/SVProgressHUD)
+* [SDWebImage](https://github.com/rs/SDWebImage)
 
 Creditos iconos
 ---------------

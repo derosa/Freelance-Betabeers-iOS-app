@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D8EE0DF1596F1E000CFF08A /* TipsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */; };
+		1D8EE0E31596F3CC00CFF08A /* JobsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */; };
 		1D8EE0A51596DEC500CFF08A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A41596DEC500CFF08A /* BaseViewController.m */; };
 		1D8EE0A91596E01E00CFF08A /* NSString+Base64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */; };
 		1D8EE0CE1596EA2400CFF08A /* JSReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0CB1596EA2400CFF08A /* JSReachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -66,6 +68,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D8EE0DD1596F1E000CFF08A /* TipsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsDataProvider.h; sourceTree = "<group>"; };
+		1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsDataProvider.m; sourceTree = "<group>"; };
+		1D8EE0E11596F3CC00CFF08A /* JobsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobsDataProvider.h; sourceTree = "<group>"; };
+		1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobsDataProvider.m; sourceTree = "<group>"; };
 		1D8EE0A31596DEC500CFF08A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1D8EE0A41596DEC500CFF08A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		1D8EE0A71596E01E00CFF08A /* NSString+Base64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64String.h"; sourceTree = "<group>"; };
@@ -201,6 +207,10 @@
 			children = (
 				1DA3B67015963D3200C85842 /* TwitterDataProvider.h */,
 				1DA3B67115963D3200C85842 /* TwitterDataProvider.m */,
+				1D8EE0DD1596F1E000CFF08A /* TipsDataProvider.h */,
+				1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */,
+				1D8EE0E11596F3CC00CFF08A /* JobsDataProvider.h */,
+				1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -501,6 +511,8 @@
 				791456B215966B670061DDAA /* ActionSheetDistancePicker.m in Sources */,
 				791456B315966B670061DDAA /* ActionSheetStringPicker.m in Sources */,
 				791456B415966B670061DDAA /* DistancePickerView.m in Sources */,
+				1D8EE0DF1596F1E000CFF08A /* TipsDataProvider.m in Sources */,
+				1D8EE0E31596F3CC00CFF08A /* JobsDataProvider.m in Sources */,
 				1D8EE0A51596DEC500CFF08A /* BaseViewController.m in Sources */,
 				1D8EE0A91596E01E00CFF08A /* NSString+Base64String.m in Sources */,
 				1D8EE0CE1596EA2400CFF08A /* JSReachability.m in Sources */,

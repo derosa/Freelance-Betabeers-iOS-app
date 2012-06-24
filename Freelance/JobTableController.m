@@ -9,12 +9,13 @@
 #import "JobTableController.h"
 #import "JobViewController.h"
 
-#import "SVProgressHUD.h"
+#import "JobsDataProvider.h"
 
-@interface JobTableController () <UIAlertViewDelegate>{
-    NSMutableArray *arrayC;
-    IBOutlet UITableView *tableView;
+@interface JobTableController () <UIAlertViewDelegate> {
+    NSArray *_jobs;
 }
+
+@property (strong, nonatomic) IBOutlet JobsDataProvider *jobsDataProvider;
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
@@ -23,6 +24,7 @@
 @end
 
 @implementation JobTableController
+@synthesize jobsDataProvider;
 
 @synthesize tableView;
 
@@ -35,34 +37,15 @@
         
         [SVProgressHUD show];
         
-        NSString *url = @"http://migueldev.com/freelance/trabajos.php";
-        //TODO: should be done asynchronously
-        NSData *items = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        NSInputStream *stream = [[NSInputStream alloc] initWithData:items];
-        [stream open];
+        [self.jobsDataProvider requestJobsWithCompletionBlock:^(NSArray *jobs) {
+            _jobs = jobs;
+            
+            [self.tableView reloadData];
+            
+            [SVProgressHUD dismiss];
+        }];
         
-        if (stream) {
-            
-            arrayC = [[NSMutableArray alloc] init];
-            
-            NSError *parseError = nil;
-            id jsonObject = [NSJSONSerialization JSONObjectWithStream:stream options:NSJSONReadingAllowFragments error:&parseError];
-            
-            NSArray *items = [[jsonObject objectForKey:@"response"] objectForKey:@"jobs"];
-            [items enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
-                [arrayC addObject:item];
-            }];
-            
-            [self.tableView reloadData]; 
-            
-        } else {
-            NSLog(@"Failed to open stream.");
-        }
-        
-        [SVProgressHUD dismiss];
-        
-        
-    }else{
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Hace falta conexión a internet" delegate: self cancelButtonTitle: @"Cancelar" otherButtonTitles: @"Reintentar", nil];
         [alert show];
     }
@@ -88,7 +71,7 @@
         JobViewController *destination = [segue destinationViewController];
         NSIndexPath * indexPath = (NSIndexPath*)sender;
         
-        destination.job = [arrayC objectAtIndex:[indexPath row]];
+        destination.job = [_jobs objectAtIndex:[indexPath row]];
     }
 }
 
@@ -119,7 +102,7 @@
 
 // tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrayC count];
+    return [_jobs count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -129,7 +112,7 @@
     static const CGFloat kJobTitleWidth = 300.f;
     static const CGFloat kJobTitleVerticalMargin = 10.f;
     
-    NSString *jobTitle = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"title"];
+    NSString *jobTitle = [[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
     CGSize size = [jobTitle sizeWithFont:[UIFont systemFontOfSize:kJobTitleLabelFontSize] constrainedToSize:CGSizeMake(kJobTitleWidth, CGFLOAT_MAX)];
     
     return MAX(kCellMinHeight, size.height + kJobTitleVerticalMargin);
@@ -146,7 +129,7 @@
         cell.textLabel.numberOfLines = 0;
     }
     
-	NSString *cellValue =[[arrayC objectAtIndex:indexPath.row] objectForKey:@"title"];
+	NSString *cellValue =[[_jobs objectAtIndex:indexPath.row] objectForKey:@"title"];
 	cell.textLabel.text = cellValue ;
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     
