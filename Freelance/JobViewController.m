@@ -15,7 +15,6 @@
     IBOutlet UIScrollView *scrollview;
 }
 
-@property (strong, nonatomic) NSDictionary *job;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *web;
 

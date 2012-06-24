@@ -10,4 +10,6 @@
 
 @interface SimpleTableCell : UITableViewCell
 
+- (void)setTweet:(NSDictionary *)tweet;
+
 @end

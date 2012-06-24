@@ -10,4 +10,6 @@
 
 @interface JobViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *job;
+
 @end

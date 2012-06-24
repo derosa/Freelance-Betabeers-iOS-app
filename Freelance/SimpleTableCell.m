@@ -8,6 +8,8 @@
 
 #import "SimpleTableCell.h"
 
+#import "UIImageView+WebCache.h"
+
 @interface SimpleTableCell()
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -21,5 +23,14 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize prepTimeLabel = _prepTimeLabel;
 @synthesize thumbnailImageView = _thumbnailImageView;
+
+- (void)setTweet:(NSDictionary *)tweet
+{
+    [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:[tweet objectForKey:@"profile_image_url"]]  placeholderImage:[UIImage imageNamed:@"twitter.png"]];
+    
+	self.nameLabel.text = [tweet objectForKey:@"from_user"];
+
+    self.prepTimeLabel.text = [tweet objectForKey:@"text"];
+}
 
 @end

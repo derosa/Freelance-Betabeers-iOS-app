@@ -10,8 +10,6 @@
 
 #import <Twitter/Twitter.h>
 
-#import "UIImageView+WebCache.h"
-
 #import "SVProgressHUD.h"
 
 #include <netinet/in.h>
@@ -175,15 +173,7 @@
     
     NSLog(@"%@",avatar_url);
     
-    [cell.thumbnailImageView setImageWithURL:[NSURL URLWithString:[[arrayC objectAtIndex:indexPath.row] objectForKey:@"profile_image_url"]]  placeholderImage:[UIImage imageNamed:@"twitter.png"]];
-    
-
-
-
-
-	cell.nameLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"from_user"];
-
-    cell.prepTimeLabel.text = [[arrayC objectAtIndex:indexPath.row] objectForKey:@"text"];  
+    [cell setTweet:[arrayC objectAtIndex:indexPath.row]];
     
 
     return cell;
