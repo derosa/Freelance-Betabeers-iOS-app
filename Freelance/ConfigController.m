@@ -8,12 +8,11 @@
 
 #import "ConfigController.h"
 
-#import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 
 #import "ActionSheetStringPicker.h"
 
-@interface ConfigController () <MFMailComposeViewControllerDelegate,UITextFieldDelegate>  {
+@interface ConfigController () <UITextFieldDelegate>  {
 }
 
 
@@ -178,40 +177,6 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=535827516"]];
 
 }
-
-- (IBAction)sendEmailFeedback:(id)sender
-{
-
-    
-    if ([MFMailComposeViewController canSendMail]) {
-
-        MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
-        [controller setSubject:@"Sugerencias Freelance Betabeers"];
-        [controller setToRecipients:[NSArray arrayWithObject:@"gafeman@gmail.com"]];
-        [self presentModalViewController:controller animated:YES];
-        controller.mailComposeDelegate = self;
-
-    }else{
-        
-        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Para enviar sugerencias antes tienes que configurar una cuenta de correo" delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-        [someError show];
-        
-    }
-    
-}
-
-
-
-#pragma mark -
-#pragma mark MFMailComposeViewControllerDelegate
-
-
-
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-
 
 
 #pragma mark -
