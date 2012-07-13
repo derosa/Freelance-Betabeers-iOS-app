@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D8EE0DF1596F1E000CFF08A /* TipsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */; };
-		1D8EE0E31596F3CC00CFF08A /* JobsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */; };
 		1D8EE0A51596DEC500CFF08A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A41596DEC500CFF08A /* BaseViewController.m */; };
 		1D8EE0A91596E01E00CFF08A /* NSString+Base64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */; };
 		1D8EE0CE1596EA2400CFF08A /* JSReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0CB1596EA2400CFF08A /* JSReachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1D8EE0DF1596F1E000CFF08A /* TipsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */; };
+		1D8EE0E31596F3CC00CFF08A /* JobsDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */; };
 		1DA3B67215963D3200C85842 /* TwitterDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3B67115963D3200C85842 /* TwitterDataProvider.m */; };
 		341C6EE5156C6F77009A8144 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341C6EE4156C6F77009A8144 /* Twitter.framework */; };
 		341C6F18156E91D2009A8144 /* JobTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341C6F17156E91D2009A8144 /* JobTableController.m */; };
@@ -68,16 +68,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D8EE0DD1596F1E000CFF08A /* TipsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsDataProvider.h; sourceTree = "<group>"; };
-		1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsDataProvider.m; sourceTree = "<group>"; };
-		1D8EE0E11596F3CC00CFF08A /* JobsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobsDataProvider.h; sourceTree = "<group>"; };
-		1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobsDataProvider.m; sourceTree = "<group>"; };
 		1D8EE0A31596DEC500CFF08A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1D8EE0A41596DEC500CFF08A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		1D8EE0A71596E01E00CFF08A /* NSString+Base64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64String.h"; sourceTree = "<group>"; };
 		1D8EE0A81596E01E00CFF08A /* NSString+Base64String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64String.m"; sourceTree = "<group>"; };
 		1D8EE0CA1596EA2400CFF08A /* JSReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSReachability.h; sourceTree = "<group>"; };
 		1D8EE0CB1596EA2400CFF08A /* JSReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSReachability.m; sourceTree = "<group>"; };
+		1D8EE0DD1596F1E000CFF08A /* TipsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsDataProvider.h; sourceTree = "<group>"; };
+		1D8EE0DE1596F1E000CFF08A /* TipsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsDataProvider.m; sourceTree = "<group>"; };
+		1D8EE0E11596F3CC00CFF08A /* JobsDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobsDataProvider.h; sourceTree = "<group>"; };
+		1D8EE0E21596F3CC00CFF08A /* JobsDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobsDataProvider.m; sourceTree = "<group>"; };
 		1DA3B67015963D3200C85842 /* TwitterDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterDataProvider.h; sourceTree = "<group>"; };
 		1DA3B67115963D3200C85842 /* TwitterDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterDataProvider.m; sourceTree = "<group>"; };
 		341C6EE4156C6F77009A8144 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -138,7 +138,6 @@
 		791456AD15966B670061DDAA /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheetStringPicker.m; path = Dependencies/ActionSheetPicker/Pickers/ActionSheetStringPicker.m; sourceTree = "<group>"; };
 		791456AE15966B670061DDAA /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistancePickerView.h; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.h; sourceTree = "<group>"; };
 		791456AF15966B670061DDAA /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistancePickerView.m; path = Dependencies/ActionSheetPicker/Pickers/DistancePickerView.m; sourceTree = "<group>"; };
-		793398631596986000E23943 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		DB6B7E3215939D0900DA5685 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		DB6B7E3315939D0900DA5685 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		DB6B7E3415939D0900DA5685 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -440,6 +439,7 @@
 			knownRegions = (
 				en,
 				es,
+				de,
 			);
 			mainGroup = 34AF1EF9156B2350004AD777;
 			productRefGroup = 34AF1F05156B2350004AD777 /* Products */;
@@ -534,7 +534,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				34AF1F1B156B2350004AD777 /* en */,
-				793398631596986000E23943 /* es */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -564,7 +563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -587,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "";

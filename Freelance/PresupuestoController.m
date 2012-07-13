@@ -156,11 +156,13 @@
     int irpf = [prefs integerForKey:@"irpf"];
     NSString *name = [prefs stringForKey:@"name"];
     NSString *cif = [prefs stringForKey:@"cif"];
+    NSString *divisa = [prefs stringForKey:@"divisa"];
 
     if (!switchIRPF.on)
         irpf = 0;
     
-    NSString *values = [[NSString stringWithFormat:@"%@;%@;%@;%d;%d;%@;%@;%@;%@;%@", name, cif, self.stepperValueText1.text, iva, irpf, self.stepperValueText2.text, self.stepperValueText3.text, self.stepperValueText4.text, self.stepperValueText5.text, self.stepperValueText6.text] base64String];
+    NSString *values = [[NSString stringWithFormat:@"%@;%@;%@;%d;%d;%@;%@;%@;%@;%@;%@", name, cif, self.stepperValueText1.text, iva, irpf, self.stepperValueText2.text, self.stepperValueText3.text, self.stepperValueText4.text, self.stepperValueText5.text, self.stepperValueText6.text, divisa] base64String];
+    NSLog(@"%@",values);
 
     if ([MFMailComposeViewController canSendMail]) {
         
@@ -189,7 +191,7 @@
 {
     [super viewDidLoad];
 
-    #warning esto es una chapuza.... este controlador no tiene por que saber que otros controladores hay y en que orden estan...
+    //warning esto es una chapuza.... este controlador no tiene por que saber que otros controladores hay y en que orden estan...
     [[[[[self tabBarController] tabBar] items] objectAtIndex:1] setBadgeValue:@"1"];
     
     [self sumar];
