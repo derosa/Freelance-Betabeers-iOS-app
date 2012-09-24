@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Presupuesto Controller - First-->
@@ -86,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="FnH-Zo-4A4">
-                                <rect key="frame" x="222" y="346" width="79" height="27"/>
+                                <rect key="frame" x="221" y="343" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="switchIRPFValueChanged:" destination="2" eventType="valueChanged" id="Kvm-qI-Oai"/>
@@ -232,6 +231,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </scrollView>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="PQB-Jg-R6i" userLabel="Switch - IVA">
+                                <rect key="frame" x="221" y="314" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="switchIVAValueChanged:" destination="2" eventType="valueChanged" id="ba6-by-NUI"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                     </view>
@@ -253,6 +259,7 @@
                         <outlet property="stepperValueText5" destination="CaQ-Lz-ihb" id="5z4-Eg-rgs"/>
                         <outlet property="stepperValueText6" destination="c2q-NU-56K" id="PFJ-c3-Qhe"/>
                         <outlet property="switchIRPF" destination="FnH-Zo-4A4" id="6Hi-k5-mXD"/>
+                        <outlet property="switchIVA" destination="PQB-Jg-R6i" id="QuT-wg-1Ci"/>
                         <outlet property="txtBase" destination="BTT-5w-Em0" id="WBU-KN-sJZ"/>
                         <outlet property="txtHoras" destination="SOo-wR-MFk" id="TaY-Yh-NIM"/>
                         <outlet property="txtIRPF" destination="pGy-9K-fLO" id="ZFf-4I-Rwu"/>
@@ -555,7 +562,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Cabecera presupuesto" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="72m-EP-aDW">
-                                        <rect key="frame" x="21" y="5" width="279" height="21"/>
+                                        <rect key="frame" x="21" y="8" width="279" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -578,6 +585,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentInset" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I6D-0S-TfV">
                                 <rect key="frame" x="43" y="331" width="235" height="37"/>
@@ -784,6 +792,14 @@
         <class className="ConfigController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigController.h"/>
             <relationships>
+                <relationship kind="action" name="rateApp:"/>
+                <relationship kind="action" name="stepperValueChanged1:"/>
+                <relationship kind="action" name="stepperValueChanged2:"/>
+                <relationship kind="action" name="stepperValueChanged4:"/>
+                <relationship kind="action" name="stepperValueChanged5:"/>
+                <relationship kind="action" name="stepperValueChanged6:"/>
+                <relationship kind="action" name="stepperValueChanged7:"/>
+                <relationship kind="action" name="textFieldReturn:"/>
                 <relationship kind="outlet" name="ourStepper1" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="ourStepper2" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="scrollview" candidateClass="UIScrollView"/>
@@ -799,6 +815,7 @@
         <class className="JobTableController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/JobTableController.h"/>
             <relationships>
+                <relationship kind="action" name="info:"/>
                 <relationship kind="outlet" name="jobsDataProvider" candidateClass="JobsDataProvider"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
@@ -806,6 +823,7 @@
         <class className="JobViewController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/JobViewController.h"/>
             <relationships>
+                <relationship kind="action" name="replyJob:"/>
                 <relationship kind="outlet" name="btnReply" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descripcion" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="fecha" candidateClass="UILabel"/>
@@ -827,6 +845,7 @@
                 <relationship kind="action" name="stepperValueChanged5:"/>
                 <relationship kind="action" name="stepperValueChanged6:"/>
                 <relationship kind="action" name="switchIRPFValueChanged:"/>
+                <relationship kind="action" name="switchIVAValueChanged:"/>
                 <relationship kind="outlet" name="lblIRPF" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lblIVA" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ourStepper1" candidateClass="UIStepper"/>
@@ -843,6 +862,7 @@
                 <relationship kind="outlet" name="stepperValueText5" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="stepperValueText6" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="switchIRPF" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="switchIVA" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="txtBase" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="txtHoras" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="txtIRPF" candidateClass="UILabel"/>
@@ -868,6 +888,8 @@
         <class className="TwitterTableController" superclassName="BaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterTableController.h"/>
             <relationships>
+                <relationship kind="action" name="newTweet:"/>
+                <relationship kind="action" name="refreshTweet:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="twitterDataProvider" candidateClass="TwitterDataProvider"/>
             </relationships>

@@ -14,6 +14,7 @@
     IBOutlet UIScrollView *scrollview;
 }
 
+@property (strong, nonatomic) IBOutlet UISwitch *switchIVA;
 @property (strong, nonatomic) IBOutlet UISwitch *switchIRPF;
 
 @property (strong, nonatomic) IBOutlet UIStepper *ourStepper1;
@@ -48,10 +49,12 @@
 - (IBAction)stepperValueChanged6:(id)sender;
 
 - (IBAction)switchIRPFValueChanged:(id)sender;
+- (IBAction)switchIVAValueChanged:(id)sender;
 
 @end
 
 @implementation PresupuestoController
+@synthesize switchIVA;
 
 @synthesize
     ourStepper1, ourStepper2, ourStepper3,ourStepper4, ourStepper5, ourStepper6,
@@ -67,7 +70,8 @@
 - (void)sumar
 {
     int precio_hora, horas;
-    float sum_irpf;
+    float sum_irpf = 0.0f;
+    float sum_iva = 0.0f;
         
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
     int iva = [prefs integerForKey:@"iva"];
@@ -90,12 +94,16 @@
     self.txtIVA.text = [NSString stringWithFormat:@"%.2lf %@", ([self.txtBase.text floatValue] * p1), divisa ];
     self.txtIRPF.text = [NSString stringWithFormat:@"%.2lf %@", ([self.txtBase.text floatValue] * p2), divisa ];
         
-    if (self.switchIRPF.on)
+    if (self.switchIRPF.on){
         sum_irpf = [self.txtIRPF.text floatValue];
-    else
-        sum_irpf = 0;
+    }
     
-    self.txtTotal.text = [NSString stringWithFormat:@"%.2lf %@", (([self.txtBase.text floatValue] + [self.txtIVA.text floatValue]) - sum_irpf) , divisa];
+    if(self.switchIVA.on){
+        sum_iva = [self.txtIVA.text floatValue];
+    }
+    
+    self.txtTotal.text = [NSString stringWithFormat:@"%.2lf %@", (([self.txtBase.text floatValue] +
+                                                                   sum_iva) - sum_irpf) , divisa];
 }
 
 - (IBAction)stepperValueChanged1:(id)sender 
@@ -147,7 +155,12 @@
 - (IBAction)switchIRPFValueChanged:(id)sender 
 {
     [self sumar];
-}  
+}
+
+- (IBAction)switchIVAValueChanged:(id)sender
+{
+    [self sumar];
+}
 
 - (IBAction)sendEmail:(id)sender
 {        
@@ -208,8 +221,8 @@
     NSString *divisa = [prefs objectForKey:@"divisa"];
     
     if( !iva ){
-        iva = 18;
-        irpf = 15;
+        iva = 21;
+        irpf = 20;
         precio_hora = 30;
         divisa = @"EUR";
         
@@ -231,4 +244,8 @@
     [self sumar];
 }
 
+- (void)viewDidUnload {
+    [self setSwitchIVA:nil];
+    [super viewDidUnload];
+}
 @end
