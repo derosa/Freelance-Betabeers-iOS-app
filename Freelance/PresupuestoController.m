@@ -223,6 +223,7 @@
     if( !iva ){
         iva = 21;
         irpf = 21;
+
         precio_hora = 30;
         divisa = @"EUR";
         
